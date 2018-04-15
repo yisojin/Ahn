@@ -1,6 +1,7 @@
 package kr.hs.dgsw.ahn.Activity;
 
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,11 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.io.IOException;
-
 import kr.hs.dgsw.ahn.Database.DBManager;
+import kr.hs.dgsw.ahn.Model.JoinAuth;
 import kr.hs.dgsw.ahn.Model.ResponseFormat;
-import kr.hs.dgsw.ahn.Model.UserAuth;
 import kr.hs.dgsw.ahn.Network.Network;
 import kr.hs.dgsw.ahn.R;
 import retrofit.Call;
@@ -53,12 +52,12 @@ public class RegisterActivity extends AppCompatActivity {
                 int classIdx = Integer.parseInt(etClassIdx.getText().toString());
                 int classNum = Integer.parseInt(etClassNum.getText().toString());
 
-                UserAuth user = new UserAuth();
+                JoinAuth user = new JoinAuth();
 
                 user.setName(name);
                 user.setEmail(email);
                 user.setMobile(tel);
-                user.setPassword(password);
+                user.setPw(password);
                 user.setGender(gender);
                 user.setClass_idx(classIdx);
                 user.setClass_number(classNum);
@@ -69,6 +68,8 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Response<ResponseFormat> response, Retrofit retrofit) {
                         Log.e("result", response.body().toString());
+                        Intent intent = new Intent(RegisterActivity.this, AuthActivity.class);
+                        startActivity(intent);
                     }
 
                     @Override

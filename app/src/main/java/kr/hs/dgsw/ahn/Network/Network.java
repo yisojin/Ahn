@@ -1,10 +1,8 @@
 package kr.hs.dgsw.ahn.Network;
 
-import org.json.JSONArray;
-
-import kr.hs.dgsw.ahn.Activity.RegisterActivity;
+import kr.hs.dgsw.ahn.Model.JoinAuth;
+import kr.hs.dgsw.ahn.Model.LoginAuth;
 import kr.hs.dgsw.ahn.Model.ResponseFormat;
-import kr.hs.dgsw.ahn.Model.UserAuth;
 import retrofit.Call;
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
@@ -19,10 +17,10 @@ public interface Network {
 
     //login
 @POST("auth/signin")
-    Call<ResponseFormat> signin(@Body UserAuth auth);
+    Call<ResponseFormat> signin(@Body LoginAuth auth);
     //register
 @POST("auth/signup")
-    Call<ResponseFormat> signup(@Body UserAuth auth);
+    Call<ResponseFormat> signup(@Body JoinAuth auth);
 
     public static final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("http://flow.cafe24app.com/")

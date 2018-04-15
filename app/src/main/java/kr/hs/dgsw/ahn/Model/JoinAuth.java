@@ -1,17 +1,13 @@
 package kr.hs.dgsw.ahn.Model;
 
-import java.io.StringBufferInputStream;
-import java.util.HashMap;
-
 /**
- * Created by leesojin on 2018. 4. 10..
+ * Created by leesojin on 2018. 4. 15..
  */
 
-public class UserAuth {
+public class JoinAuth {
 
-    private int idx;
     private String email;
-    private String password;
+    private String pw;
     private String name;
     private String gender;
     private String mobile;
@@ -20,24 +16,15 @@ public class UserAuth {
 
     @Override
     public String toString() {
-        return "UserAuth{" +
-                "idx=" + idx +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
+        return "JoinAuth{" +
+                "email='" + email + '\'' +
+                ", pw='" + pw + '\'' +
                 ", name='" + name + '\'' +
                 ", gender='" + gender + '\'' +
                 ", mobile='" + mobile + '\'' +
                 ", class_idx=" + class_idx +
                 ", class_number=" + class_number +
                 '}';
-    }
-
-    public int getIdx() {
-        return idx;
-    }
-
-    public void setIdx(int idx) {
-        this.idx = idx;
     }
 
     public String getEmail() {
@@ -48,12 +35,12 @@ public class UserAuth {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPw() {
+        return pw;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPw(String pw) {
+        this.pw = pw;
     }
 
     public String getName() {

@@ -1,7 +1,6 @@
 package kr.hs.dgsw.ahn.Activity;
 
 import android.content.Intent;
-import android.graphics.Region;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -12,12 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.io.IOException;
-
+import kr.hs.dgsw.ahn.Model.LoginAuth;
 import kr.hs.dgsw.ahn.Model.ResponseFormat;
-import kr.hs.dgsw.ahn.Model.UserAuth;
 import kr.hs.dgsw.ahn.Network.Network;
 import kr.hs.dgsw.ahn.R;
 import retrofit.Call;
@@ -45,10 +40,10 @@ public class AuthActivity extends AppCompatActivity {
                 String email = etEmail.getText().toString();
                 String password = etPassword.getText().toString();
 
-                UserAuth user = new UserAuth();
+                LoginAuth user = new LoginAuth();
 
                 user.setEmail(email);
-                user.setPassword(password);
+                user.setPw(password);
 
                 final Network network = Network.retrofit.create(Network.class);
                 Call<ResponseFormat> call = network.signin(user);
@@ -56,6 +51,8 @@ public class AuthActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Response<ResponseFormat> response, Retrofit retrofit) {
                         Log.e("response", response.body().toString());
+                        Intent intent = new Intent(AuthActivity.this, MainActivity.class);
+                        startActivity(intent);
                     }
 
                     @Override

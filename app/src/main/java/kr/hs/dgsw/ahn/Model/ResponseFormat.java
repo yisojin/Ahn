@@ -7,7 +7,7 @@ package kr.hs.dgsw.ahn.Model;
 public class ResponseFormat {
     private int status;
     private String message;
-    private UserAuth data;
+    private LoginAuth data;
 
     @Override
     public String toString() {
@@ -34,11 +34,11 @@ public class ResponseFormat {
         this.message = message;
     }
 
-    public UserAuth getData() {
+    public LoginAuth getData() {
         return data;
     }
 
-    public void setData(UserAuth data) {
+    public void setData(LoginAuth data) {
         this.data = data;
     }
 }
