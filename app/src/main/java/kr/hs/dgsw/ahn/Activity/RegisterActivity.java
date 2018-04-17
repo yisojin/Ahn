@@ -4,10 +4,13 @@ package kr.hs.dgsw.ahn.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import kr.hs.dgsw.ahn.Database.DBManager;
 import kr.hs.dgsw.ahn.Model.JoinAuth;
@@ -35,6 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText etGender = (EditText) findViewById(R.id.etGender);
         final EditText etClassIdx = (EditText) findViewById(R.id.etClassIdx);
         final EditText etClassNum = (EditText) findViewById(R.id.etClassNum);
+        final EditText etConfirmPassword = (EditText) findViewById(R.id.etConfirmPassword);
 
         final Button btnSubmit = (Button) findViewById(R.id.btnSubmit);
 
@@ -45,44 +49,76 @@ public class RegisterActivity extends AppCompatActivity {
 
                 // submit 버튼을 눌렀을때 일어나야 할 이벤트 처리
                 String name = etName.getText().toString();
-                String email = etEmail.getText().toString();
+                String email = etEmail.getText().toString().trim();
                 String tel = etTel.getText().toString();
-                String password = etPassword.getText().toString();
+                String firPassword = etPassword.getText().toString();
                 String gender = etGender.getText().toString();
                 int classIdx = Integer.parseInt(etClassIdx.getText().toString());
                 int classNum = Integer.parseInt(etClassNum.getText().toString());
+                String re_password = etConfirmPassword.getText().toString();
+                String password = "";
+                String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+\\.+[a-z]+";
 
-                JoinAuth user = new JoinAuth();
+                if (email.matches(emailPattern) && firPassword.equals(re_password)) {
 
-                user.setName(name);
-                user.setEmail(email);
-                user.setMobile(tel);
-                user.setPw(password);
-                user.setGender(gender);
-                user.setClass_idx(classIdx);
-                user.setClass_number(classNum);
+                    //이메일 형식이 맞고
+                    //비밀번호 확인이 완료되었을때
+                    JoinAuth user = new JoinAuth();
 
-                final Network network = Network.retrofit.create(Network.class);
-                Call<ResponseFormat> call = network.signup(user);
-                call.enqueue(new Callback<ResponseFormat>() {
-                    @Override
-                    public void onResponse(Response<ResponseFormat> response, Retrofit retrofit) {
-                        Log.e("result", response.body().toString());
-                        Intent intent = new Intent(RegisterActivity.this, AuthActivity.class);
-                        startActivity(intent);
-                    }
+                    user.setName(name);
+                    user.setEmail(email);
+                    user.setMobile(tel);
+                    user.setPw(password);
+                    user.setGender(gender);
+                    user.setClass_idx(classIdx);
+                    user.setClass_number(classNum);
 
-                    @Override
-                    public void onFailure(Throwable t) {
-                        Log.e("result", t.getMessage());
-                    }
-                });
+                    final Network network = Network.retrofit.create(Network.class);
+                    Call<ResponseFormat> call = network.signup(user);
+                    call.enqueue(new Callback<ResponseFormat>() {
+                        @Override
+                        public void onResponse(Response<ResponseFormat> response, Retrofit retrofit) {
+                            Log.e("result", response.body().toString());
+                            Intent intent = new Intent(RegisterActivity.this, AuthActivity.class);
+                            startActivity(intent);
+                        }
 
-                //database
-                dbManager.insert("INSERT INTO " +
-                        "register(email,password,name,gender,mobile,class_idx,class_number)" +
-                        " VALUES('" + email + "','" + password + "','" + name + "','" + gender + "','" + tel + "'," + classIdx + "," + classNum + ");" +
-                        "");
+                        @Override
+                        public void onFailure(Throwable t) {
+                            Log.e("result", t.getMessage());
+                        }
+                    });
+
+                    //database
+                    dbManager.insert("INSERT INTO " +
+                            "register(email,password,name,gender,mobile,class_idx,class_number)" +
+                            " VALUES('" + email + "','" + password + "','" + name + "','" + gender + "','" + tel + "'," + classIdx + "," + classNum + ");" +
+                            "");
+
+
+                } else if (!email.matches(emailPattern) && firPassword.equals(re_password)) {
+
+                    //이메일 형식이 아니고
+                    //비밀번호 확인이 완료되었을때
+
+                    Toast.makeText(RegisterActivity.this, "이메일 형식을 확인 해 주세요.", Toast.LENGTH_SHORT).show();
+
+
+                } else if (email.matches(emailPattern) && !firPassword.equals(re_password)) {
+
+                    // 이메일 형식이 맞고
+                    // 비밀번호 확인이 완료되지 않았을때 ( pw1 과 pw2 가 다름)
+
+                    Toast.makeText(RegisterActivity.this, "비밀번호를 확인 해 주세요.", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    //둘다 안맞을때
+
+                    Toast.makeText(RegisterActivity.this, "회원가입에 실패했습니다.", Toast.LENGTH_SHORT).show();
+
+                }
+
+
 
             }
 

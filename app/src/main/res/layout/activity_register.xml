@@ -17,13 +17,13 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Name"
+        android:privateImeOptions="defaultInputmode=korean"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.017"
-        android:privateImeOptions="defaultInputmode=korean" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/etEmail"
@@ -41,7 +41,7 @@
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.296" />
+        app:layout_constraintVertical_bias="0.231" />
 
     <EditText
         android:id="@+id/etTel"
@@ -59,7 +59,7 @@
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.149" />
+        app:layout_constraintVertical_bias="0.102" />
 
     <EditText
         android:id="@+id/etGender"
@@ -71,13 +71,13 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="gender"
+        android:privateImeOptions="defaultInputmode=korean"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.545"
-        android:privateImeOptions="defaultInputmode=korean" />
+        app:layout_constraintVertical_bias="0.59" />
 
     <EditText
         android:id="@+id/etPassword"
@@ -95,7 +95,7 @@
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.423" />
+        app:layout_constraintVertical_bias="0.351" />
 
     <EditText
         android:id="@+id/etClassIdx"
@@ -113,7 +113,7 @@
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.677" />
+        app:layout_constraintVertical_bias="0.708" />
 
     <EditText
         android:id="@+id/etClassNum"
@@ -131,7 +131,7 @@
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.817" />
+        app:layout_constraintVertical_bias="0.828" />
 
     <Button
         android:id="@+id/btnSubmit"
@@ -147,5 +147,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.961" />
+
+    <EditText
+        android:id="@+id/etConfirmPassword"
+        android:hint="re_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.469" />
 
 </android.support.constraint.ConstraintLayout>
