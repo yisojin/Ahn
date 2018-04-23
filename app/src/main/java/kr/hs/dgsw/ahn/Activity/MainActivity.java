@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickApplication(View view){
-        Intent intent = new Intent(MainActivity.this,MealActivity.class);
+        Intent intent = new Intent(MainActivity.this,GoOutActivity.class);
         startActivity(intent);
     }
 

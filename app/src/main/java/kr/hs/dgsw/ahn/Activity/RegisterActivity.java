@@ -57,7 +57,7 @@ public class RegisterActivity extends AppCompatActivity {
                 int classNum = Integer.parseInt(etClassNum.getText().toString());
                 String re_password = etConfirmPassword.getText().toString();
                 String password = "";
-                String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+\\.+[a-z]+";
+                String emailPattern = "[a-zA-Z0-9._-]+@[dgsw]{4}+\\.+[hs]{2}+\\.+[kr]{2}+";
 
                 if (email.matches(emailPattern) && firPassword.equals(re_password)) {
 
