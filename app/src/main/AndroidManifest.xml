@@ -23,7 +23,9 @@
         <activity android:name=".Activity.MainActivity" />
         <activity android:name=".Activity.RegisterActivity" />
         <activity android:name=".Activity.DbCheckActivity" />
-        <activity android:name=".Activity.GoOutActivity"></activity>
+        <activity android:name=".Activity.GoOutActivity" />
+        <activity android:name=".Activity.TestGoOutActivity" />
+        <activity android:name=".Activity.TestSleepOutActivity"></activity>
     </application>
 
 </manifest>
