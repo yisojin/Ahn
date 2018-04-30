@@ -1,6 +1,5 @@
-package kr.hs.dgsw.ahn.Network;
+package kr.hs.dgsw.flow.Network;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.TextView;
@@ -12,7 +11,7 @@ import java.lang.ref.WeakReference;
 import java.util.Calendar;
 import java.util.List;
 
-import kr.hs.dgsw.ahn.R;
+import kr.hs.dgsw.flow.R;
 
 /**
  * Created by leesojin on 2018. 3. 27..

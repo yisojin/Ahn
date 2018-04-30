@@ -1,9 +1,9 @@
-package kr.hs.dgsw.ahn.Network;
+package kr.hs.dgsw.flow.Network;
 
-import kr.hs.dgsw.ahn.Model.GoOut;
-import kr.hs.dgsw.ahn.Model.JoinAuth;
-import kr.hs.dgsw.ahn.Model.LoginAuth;
-import kr.hs.dgsw.ahn.Model.ResponseFormat;
+import kr.hs.dgsw.flow.Model.GoOut;
+import kr.hs.dgsw.flow.Model.JoinAuth;
+import kr.hs.dgsw.flow.Model.LoginAuth;
+import kr.hs.dgsw.flow.Model.ResponseFormat;
 import retrofit.Call;
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;

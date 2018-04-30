@@ -1,4 +1,4 @@
-package kr.hs.dgsw.ahn.Activity;
+package kr.hs.dgsw.flow.Activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -11,10 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import kr.hs.dgsw.ahn.Model.LoginAuth;
-import kr.hs.dgsw.ahn.Model.ResponseFormat;
-import kr.hs.dgsw.ahn.Network.Network;
-import kr.hs.dgsw.ahn.R;
+import kr.hs.dgsw.flow.Model.LoginAuth;
+import kr.hs.dgsw.flow.Model.ResponseFormat;
+import kr.hs.dgsw.flow.Network.Network;
+import kr.hs.dgsw.flow.R;
 import retrofit.Call;
 import retrofit.Callback;
 import retrofit.Response;

@@ -1,4 +1,4 @@
-package kr.hs.dgsw.ahn.Network;
+package kr.hs.dgsw.flow.Network;
 
 import android.os.AsyncTask;
 import android.view.View;
@@ -10,7 +10,7 @@ import org.hyunjun.school.SchoolException;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-import kr.hs.dgsw.ahn.R;
+import kr.hs.dgsw.flow.R;
 
 /**
  * Created by leesojin on 2018. 3. 27..

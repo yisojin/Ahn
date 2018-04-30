@@ -1,6 +1,4 @@
-package kr.hs.dgsw.ahn.Model;
-
-import java.util.Date;
+package kr.hs.dgsw.flow.Model;
 
 /**
  * Created by leesojin on 2018. 4. 23..

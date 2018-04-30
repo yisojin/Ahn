@@ -1,4 +1,4 @@
-package kr.hs.dgsw.ahn.Model;
+package kr.hs.dgsw.flow.Model;
 
 /**
  * Created by leesojin on 2018. 4. 11..

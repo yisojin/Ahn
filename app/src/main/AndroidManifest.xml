@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="kr.hs.dgsw.ahn">
+    package="kr.hs.dgsw.flow">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,21 +11,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.AuthActivity">
+        <activity android:name="kr.hs.dgsw.flow.Activity.AuthActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.MealActivity" />
-        <activity android:name=".Activity.ApplicationActivity" />
-        <activity android:name=".Activity.MainActivity" />
-        <activity android:name=".Activity.RegisterActivity" />
-        <activity android:name=".Activity.DbCheckActivity" />
-        <activity android:name=".Activity.GoOutActivity" />
-        <activity android:name=".Activity.TestGoOutActivity" />
-        <activity android:name=".Activity.TestSleepOutActivity"></activity>
+        <activity android:name="kr.hs.dgsw.flow.Activity.MealActivity" />
+        <activity android:name="kr.hs.dgsw.flow.Activity.ApplicationActivity" />
+        <activity android:name="kr.hs.dgsw.flow.Activity.MainActivity" />
+        <activity android:name="kr.hs.dgsw.flow.Activity.RegisterActivity" />
+        <activity android:name="kr.hs.dgsw.flow.Activity.DbCheckActivity" />
+        <activity android:name="kr.hs.dgsw.flow.Activity.GoOutActivity" />
+        <activity android:name="kr.hs.dgsw.flow.Activity.TestGoOutActivity" />
+        <activity android:name="kr.hs.dgsw.flow.Activity.TestSleepOutActivity"></activity>
     </application>
 
 </manifest>

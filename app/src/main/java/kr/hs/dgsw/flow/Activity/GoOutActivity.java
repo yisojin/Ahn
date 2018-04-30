@@ -1,10 +1,8 @@
-package kr.hs.dgsw.ahn.Activity;
+package kr.hs.dgsw.flow.Activity;
 
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,18 +15,13 @@ import android.widget.RadioGroup;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.List;
 
-import kr.hs.dgsw.ahn.Model.GoOut;
-import kr.hs.dgsw.ahn.Model.ResponseFormat;
-import kr.hs.dgsw.ahn.Network.Network;
-import kr.hs.dgsw.ahn.Network.RunTask2;
-import kr.hs.dgsw.ahn.R;
+import kr.hs.dgsw.flow.Model.GoOut;
+import kr.hs.dgsw.flow.Model.ResponseFormat;
+import kr.hs.dgsw.flow.Network.Network;
+import kr.hs.dgsw.flow.R;
 import retrofit.Call;
 import retrofit.Callback;
 import retrofit.Response;
@@ -181,13 +174,14 @@ public class GoOutActivity extends AppCompatActivity {
         }
     };
 
-
+// start time simple date format
+    // yyyy-MM-dd HH:mm:ss
     public String s() {
-        return SDATE + " " + STIME;
+       return  SDATE + " " + STIME+":00";
     }
-
+//end time
     public String e() {
-        return EDATE + " " + ETIME;
+        return EDATE + " " + ETIME+":00";
     }
 
 

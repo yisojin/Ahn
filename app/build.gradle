@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "kr.hs.dgsw.ahn"
+        applicationId "kr.hs.dgsw.flow"
         minSdkVersion 23
         targetSdkVersion 26
         versionCode 1
