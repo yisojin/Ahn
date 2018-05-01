@@ -1,17 +1,17 @@
 package kr.hs.dgsw.flow.Model;
 
 /**
- * Created by leesojin on 2018. 4. 11..
+ * Created by leesojin on 2018. 4. 30..
  */
 
-public class ResponseFormat {
+public class ResponseFormat2 {
     private int status;
     private String message;
-    private Object data;
+    private GoOut data;
 
     @Override
     public String toString() {
-        return "ResponseFormat{" +
+        return "ResponseFormat2{" +
                 "status=" + status +
                 ", message='" + message + '\'' +
                 ", data=" + data +
@@ -34,11 +34,11 @@ public class ResponseFormat {
         this.message = message;
     }
 
-    public Object getData() {
+    public GoOut getData() {
         return data;
     }
 
-    public void setData(Object data) {
+    public void setData(GoOut data) {
         this.data = data;
     }
 }
