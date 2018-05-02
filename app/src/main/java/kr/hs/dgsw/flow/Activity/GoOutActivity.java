@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
@@ -40,6 +41,13 @@ public class GoOutActivity extends AppCompatActivity {
 
         final RadioButton go = (RadioButton) findViewById(R.id.rbGoOut);
         final RadioButton sleep = (RadioButton) findViewById(R.id.rbSleepOut);
+
+//        go.setOnClickListener();
+//        sleep.setOnClickListener();
+
+        final RadioGroup radioGroup = (RadioGroup) findViewById(R.id.rbGroup);
+//        radioGroup.setOnCheckedChangeListener();
+
 
         final Button btnStartDate = (Button) findViewById(R.id.btnStartDate);
         final Button btnStartTime = (Button) findViewById(R.id.btnStartTime);

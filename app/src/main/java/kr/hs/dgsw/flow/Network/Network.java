@@ -4,7 +4,6 @@ import kr.hs.dgsw.flow.Model.GoOut;
 import kr.hs.dgsw.flow.Model.JoinAuth;
 import kr.hs.dgsw.flow.Model.LoginAuth;
 import kr.hs.dgsw.flow.Model.ResponseFormat;
-import kr.hs.dgsw.flow.Model.ResponseFormat2;
 import retrofit.Call;
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
