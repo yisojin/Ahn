@@ -42,8 +42,18 @@ public class GoOutActivity extends AppCompatActivity {
         final RadioButton go = (RadioButton) findViewById(R.id.rbGoOut);
         final RadioButton sleep = (RadioButton) findViewById(R.id.rbSleepOut);
 
-//        go.setOnClickListener();
-//        sleep.setOnClickListener();
+        go.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        sleep.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         final RadioGroup radioGroup = (RadioGroup) findViewById(R.id.rbGroup);
 //        radioGroup.setOnCheckedChangeListener();
