@@ -34,29 +34,20 @@ public class GoOutActivity extends AppCompatActivity {
     String ETIME = "";
     String EDATETIME = "";
     int year=0, month=0, day=0, hour=0, minute=0;
+    RadioButton go, sleep;
+    RadioGroup radioGroup;
+    Network network;
+    GoOut goOut;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_go_out);
 
-        final RadioButton go = (RadioButton) findViewById(R.id.rbGoOut);
-        final RadioButton sleep = (RadioButton) findViewById(R.id.rbSleepOut);
+        go = (RadioButton) findViewById(R.id.rbGoOut);
+        sleep = (RadioButton) findViewById(R.id.rbSleepOut);
 
-        go.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        sleep.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        final RadioGroup radioGroup = (RadioGroup) findViewById(R.id.rbGroup);
-//        radioGroup.setOnCheckedChangeListener();
+        radioGroup = (RadioGroup) findViewById(R.id.rbGroup);
+        radioGroup.setOnCheckedChangeListener(GroupChangeListener);
 
 
         final Button btnStartDate = (Button) findViewById(R.id.btnStartDate);
@@ -72,6 +63,8 @@ public class GoOutActivity extends AppCompatActivity {
         day = calendar.get(Calendar.DAY_OF_MONTH);
         hour = calendar.get(Calendar.HOUR_OF_DAY);
         minute = calendar.get(Calendar.MINUTE);
+
+
 
         btnStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,45 +99,58 @@ public class GoOutActivity extends AppCompatActivity {
                 EDATETIME = e();
                 String reason = etReason.getText().toString();
 
-                GoOut goOut = new GoOut();
+                goOut = new GoOut();
                 goOut.setStart_time("'"+SDATETIME+"'");
                 goOut.setEnd_time("'"+EDATETIME+"'");
                 goOut.setReason(reason);
 
-                final Network network = Network.retrofit.create(Network.class);
-                Call<ResponseFormat> call = network.goout(goOut);
-                Call<ResponseFormat> call2 = network.sleepout(goOut);
+                network = Network.retrofit.create(Network.class);
 
-                if (go.isChecked()) {
 
-                    call.enqueue(new Callback<ResponseFormat>() {
-                        @Override
-                        public void onResponse(Response<ResponseFormat> response, Retrofit retrofit) {
-                            Log.e("response",response.body().toString());
-                        }
-
-                        @Override
-                        public void onFailure(Throwable t) {
-                            Log.e("response",t.getMessage());
-                        }
-                    });
-                } else if (sleep.isChecked()) {
-
-                    call2.enqueue(new Callback<ResponseFormat>() {
-                        @Override
-                        public void onResponse(Response<ResponseFormat> response, Retrofit retrofit) {
-                            Log.e("response",response.body().toString());
-                        }
-
-                        @Override
-                        public void onFailure(Throwable t) {
-                            Log.e("response",t.getMessage());
-                        }
-                    });
-                }
             }
         });
     }
+
+
+    RadioGroup.OnCheckedChangeListener GroupChangeListener = new RadioGroup.OnCheckedChangeListener() {
+
+        Call<ResponseFormat> call = network.goout(goOut);
+        Call<ResponseFormat> call2 = network.sleepout(goOut);
+        @Override
+        public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+
+            if (checkedId == R.id.rbGoOut) {
+
+                call.enqueue(new Callback<ResponseFormat>() {
+                    @Override
+                    public void onResponse(Response<ResponseFormat> response, Retrofit retrofit) {
+                        Log.e("response",response.body().toString());
+                    }
+
+                    @Override
+                    public void onFailure(Throwable t) {
+                        Log.e("response",t.getMessage());
+                    }
+                });
+            } else if (checkedId == R.id.rbSleepOut) {
+
+                call2.enqueue(new Callback<ResponseFormat>() {
+                    @Override
+                    public void onResponse(Response<ResponseFormat> response, Retrofit retrofit) {
+                        Log.e("response",response.body().toString());
+                    }
+
+                    @Override
+                    public void onFailure(Throwable t) {
+                        Log.e("response",t.getMessage());
+                    }
+                });
+            }
+
+
+        }
+    };
 
     private DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
 
