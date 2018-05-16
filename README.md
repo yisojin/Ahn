@@ -13,8 +13,9 @@ implementation 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
 
 ### androidmenifest
 <pre>
-<uses-permission android:name="android.permission.INTERNET" />
+< uses-permission android:name="android.permission.INTERNET" />
 </pre>
+
 
 ### network
 <pre>
