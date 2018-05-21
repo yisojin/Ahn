@@ -8,12 +8,14 @@ public class LoginAuth {
 
     private String email;
     private String pw;
+    private String registration_token;
 
     @Override
     public String toString() {
         return "LoginAuth{" +
                 "email='" + email + '\'' +
                 ", pw='" + pw + '\'' +
+                ", registration_token='" + registration_token + '\'' +
                 '}';
     }
 
@@ -31,5 +33,13 @@ public class LoginAuth {
 
     public void setPw(String pw) {
         this.pw = pw;
+    }
+
+    public String getRegistration_token() {
+        return registration_token;
+    }
+
+    public void setRegistration_token(String registration_token) {
+        this.registration_token = registration_token;
     }
 }
