@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+
 import kr.hs.dgsw.flow.Model.LoginAuth;
 import kr.hs.dgsw.flow.Model.ResponseFormat;
 import kr.hs.dgsw.flow.Network.Network;
@@ -44,6 +46,8 @@ public class AuthActivity extends AppCompatActivity {
 
                 user.setEmail(email);
                 user.setPw(password);
+                user.setRegistration_token(FirebaseInstanceId.getInstance().getToken());
+                Log.i("token",FirebaseInstanceId.getInstance().getToken());
 
                 final Network network = Network.retrofit.create(Network.class);
                 Call<ResponseFormat> call = network.signin(user);

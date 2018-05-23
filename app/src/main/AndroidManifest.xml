@@ -26,11 +26,7 @@
         <activity android:name="kr.hs.dgsw.flow.Activity.GoOutActivity" />
         <activity android:name="kr.hs.dgsw.flow.Activity.TestGoOutActivity" />
         <activity android:name="kr.hs.dgsw.flow.Activity.TestSleepOutActivity"/>
-        <service android:name="kr.hs.dgsw.flow.FCM.MyFirebaseMessagingService">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"></action>
-            </intent-filter>
-        </service>
+
         <service
             android:name="kr.hs.dgsw.flow.FCM.MyFirebaseInstanceIDService">
             <intent-filter>
