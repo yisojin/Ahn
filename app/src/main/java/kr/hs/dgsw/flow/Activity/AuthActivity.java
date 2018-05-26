@@ -1,6 +1,7 @@
 package kr.hs.dgsw.flow.Activity;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -10,8 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import com.google.firebase.iid.FirebaseInstanceId;
 
 import kr.hs.dgsw.flow.Model.LoginAuth;
 import kr.hs.dgsw.flow.Model.ResponseFormat;
@@ -23,6 +22,8 @@ import retrofit.Response;
 import retrofit.Retrofit;
 
 public class AuthActivity extends AppCompatActivity {
+
+    private String token = "AIzaSyB4UuqS3l7U0rQrmPW7OxWbOKtQ0U7OqYo";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +47,7 @@ public class AuthActivity extends AppCompatActivity {
 
                 user.setEmail(email);
                 user.setPw(password);
-                user.setRegistration_token(FirebaseInstanceId.getInstance().getToken());
-                Log.i("token",FirebaseInstanceId.getInstance().getToken());
+                user.setRegistration_token(token);
 
                 final Network network = Network.retrofit.create(Network.class);
                 Call<ResponseFormat> call = network.signin(user);
@@ -61,7 +61,7 @@ public class AuthActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Throwable t) {
-                        Log.e("response",t.getMessage());
+                        Log.e("response", t.getMessage());
                     }
                 });
             }
