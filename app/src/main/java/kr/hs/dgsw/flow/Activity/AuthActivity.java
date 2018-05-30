@@ -12,6 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.iid.FirebaseInstanceId;
+
 import kr.hs.dgsw.flow.Model.LoginAuth;
 import kr.hs.dgsw.flow.Model.ResponseFormat;
 import kr.hs.dgsw.flow.Network.Network;
@@ -23,13 +26,13 @@ import retrofit.Retrofit;
 
 public class AuthActivity extends AppCompatActivity {
 
-    private String token = "AIzaSyB4UuqS3l7U0rQrmPW7OxWbOKtQ0U7OqYo";
+    private FirebaseApp firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
-
+        firebaseAuth = FirebaseApp.getInstance();
         css();
 
         final EditText etEmail = (EditText) findViewById(R.id.etEmail);
@@ -47,7 +50,9 @@ public class AuthActivity extends AppCompatActivity {
 
                 user.setEmail(email);
                 user.setPw(password);
-                user.setRegistration_token(token);
+                user.setRegistration_token(FirebaseInstanceId.getInstance().getToken());
+
+                Log.v("token",FirebaseInstanceId.getInstance().getToken());
 
                 final Network network = Network.retrofit.create(Network.class);
                 Call<ResponseFormat> call = network.signin(user);

@@ -1,5 +1,8 @@
 package kr.hs.dgsw.flow.Network;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+
+import kr.hs.dgsw.flow.GetToken;
 import kr.hs.dgsw.flow.Model.GoOut;
 import kr.hs.dgsw.flow.Model.JoinAuth;
 import kr.hs.dgsw.flow.Model.LoginAuth;
@@ -8,6 +11,7 @@ import retrofit.Call;
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 import retrofit.http.Body;
+import retrofit.http.Header;
 import retrofit.http.POST;
 
 /**

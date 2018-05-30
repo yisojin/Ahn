@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:804639440099:android:7877bbff2b5e3525",
         "android_client_info": {
-          "package_name": "kr.hs.dgsw"
+          "package_name": "kr.hs.dgsw.flow"
         }
       },
       "oauth_client": [
