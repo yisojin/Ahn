@@ -59,6 +59,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if (email.matches(emailPattern) && firPassword.equals(re_password)) {
 
+
+                    password = firPassword;
                     //이메일 형식이 맞고
                     //비밀번호 확인이 완료되었을때
                     JoinAuth user = new JoinAuth();
@@ -77,6 +79,9 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Response<ResponseFormat> response, Retrofit retrofit) {
                             Log.e("result", response.body().toString());
+
+                            // status 에 따른 exception 처리 하기. 200 -> success 409-> 이미 존재 ...
+
                             Intent intent = new Intent(RegisterActivity.this, AuthActivity.class);
                             startActivity(intent);
                         }

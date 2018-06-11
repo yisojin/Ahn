@@ -30,11 +30,11 @@ public interface Network {
 
     //go out
     @POST("out/go")
-    Call<ResponseFormat> goout(@Body GoOut goOut);
+    Call<ResponseFormat> goout(@Header("Authorization") String Token, @Body GoOut goOut);
 
     //sleep out
     @POST("out/sleep")
-    Call<ResponseFormat> sleepout(@Body GoOut goOut);
+    Call<ResponseFormat> sleepout(@Header("Authorization") String Token, @Body GoOut goOut);
 
     public static final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("http://flow.cafe24app.com/")

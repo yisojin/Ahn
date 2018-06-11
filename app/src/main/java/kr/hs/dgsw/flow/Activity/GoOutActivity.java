@@ -12,6 +12,10 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -33,21 +37,23 @@ public class GoOutActivity extends AppCompatActivity {
     String EDATE = "";
     String ETIME = "";
     String EDATETIME = "";
-    int year=0, month=0, day=0, hour=0, minute=0;
+    int year = 0, month = 0, day = 0, hour = 0, minute = 0;
     RadioButton go, sleep;
-    RadioGroup radioGroup;
     Network network;
     GoOut goOut;
+    int flagNum = 0;
+    // flag number 이 1 이면 외출, 2면 외박.
 
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_go_out);
 
         go = (RadioButton) findViewById(R.id.rbGoOut);
         sleep = (RadioButton) findViewById(R.id.rbSleepOut);
 
-        radioGroup = (RadioGroup) findViewById(R.id.rbGroup);
-        radioGroup.setOnCheckedChangeListener(GroupChangeListener);
+        go.setOnClickListener(radioBtnClick);
+        sleep.setOnClickListener(radioBtnClick);
 
 
         final Button btnStartDate = (Button) findViewById(R.id.btnStartDate);
@@ -63,8 +69,6 @@ public class GoOutActivity extends AppCompatActivity {
         day = calendar.get(Calendar.DAY_OF_MONTH);
         hour = calendar.get(Calendar.HOUR_OF_DAY);
         minute = calendar.get(Calendar.MINUTE);
-
-
 
         btnStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,55 +104,61 @@ public class GoOutActivity extends AppCompatActivity {
                 String reason = etReason.getText().toString();
 
                 goOut = new GoOut();
-                goOut.setStart_time("'"+SDATETIME+"'");
-                goOut.setEnd_time("'"+EDATETIME+"'");
+                goOut.setStart_time("'" + SDATETIME + "'");
+                goOut.setEnd_time("'" + EDATETIME + "'");
                 goOut.setReason(reason);
 
                 network = Network.retrofit.create(Network.class);
 
+                switch (flagNum){
+                    case 1:
+                        final Call<ResponseFormat> goCall = network.goout(FirebaseInstanceId.getInstance().getToken(), goOut);
+
+                        goCall.enqueue(new Callback<ResponseFormat>() {
+                            @Override
+                            public void onResponse(Response<ResponseFormat> response, Retrofit retrofit) {
+                                Log.e("response", response.body().toString());
+                            }
+
+                            @Override
+                            public void onFailure(Throwable t) {
+                                Log.e("response", t.getMessage());
+                            }
+                        });
+                        break;
+                    case 2:
+                        final Call<ResponseFormat> sleepCall = network.sleepout(FirebaseInstanceId.getInstance().getToken(), goOut);
+                        sleepCall.enqueue(new Callback<ResponseFormat>() {
+                            @Override
+                            public void onResponse(Response<ResponseFormat> response, Retrofit retrofit) {
+                                Log.e("response", response.body().toString());
+                            }
+
+                            @Override
+                            public void onFailure(Throwable t) {
+                                Log.e("response", t.getMessage());
+                            }
+                        });
+                        break;
+                }
 
             }
         });
     }
 
+    RadioButton.OnClickListener radioBtnClick = new RadioButton.OnClickListener() {
 
-    RadioGroup.OnCheckedChangeListener GroupChangeListener = new RadioGroup.OnCheckedChangeListener() {
-
-        Call<ResponseFormat> call = network.goout(goOut);
-        Call<ResponseFormat> call2 = network.sleepout(goOut);
         @Override
-        public void onCheckedChanged(RadioGroup group, int checkedId) {
+        public void onClick(View v) {
+            if (go.isChecked()) {
 
+             flagNum=1;
 
-            if (checkedId == R.id.rbGoOut) {
+            } else if (sleep.isChecked()) {
 
-                call.enqueue(new Callback<ResponseFormat>() {
-                    @Override
-                    public void onResponse(Response<ResponseFormat> response, Retrofit retrofit) {
-                        Log.e("response",response.body().toString());
-                    }
+                flagNum = 2;
 
-                    @Override
-                    public void onFailure(Throwable t) {
-                        Log.e("response",t.getMessage());
-                    }
-                });
-            } else if (checkedId == R.id.rbSleepOut) {
-
-                call2.enqueue(new Callback<ResponseFormat>() {
-                    @Override
-                    public void onResponse(Response<ResponseFormat> response, Retrofit retrofit) {
-                        Log.e("response",response.body().toString());
-                    }
-
-                    @Override
-                    public void onFailure(Throwable t) {
-                        Log.e("response",t.getMessage());
-                    }
-                });
             }
-
-
         }
     };
 
@@ -189,12 +199,13 @@ public class GoOutActivity extends AppCompatActivity {
     // start time simple date format
     // yyyy-MM-dd HH:mm:ss
     public String s() {
-        return  SDATE + " " + STIME;
+        return SDATE + " " + STIME;
     }
+
     //end time
     public String e() {
         return EDATE + " " + ETIME;
     }
 
-    }
+}
 

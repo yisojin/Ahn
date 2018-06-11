@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -60,6 +61,16 @@ public class AuthActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Response<ResponseFormat> response, Retrofit retrofit) {
                         Log.e("response", response.body().toString());
+                        Log.e("status",Integer.toString(response.body().getStatus()));
+
+                        if(response.body().getStatus() == 401){
+                            Toast.makeText(AuthActivity.this,"아이디나 비밀번호가 일치하지 않습니다.",Toast.LENGTH_SHORT);
+                        }
+                        else if(response.body().getStatus() == 400){
+                            Toast.makeText(AuthActivity.this,"해당 계정이 존재하지 않습니다.",Toast.LENGTH_SHORT);
+
+                        }
+
                         Intent intent = new Intent(AuthActivity.this, MainActivity.class);
                         startActivity(intent);
                     }
