@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import kr.hs.dgsw.flow.Database.DBManager;
 import kr.hs.dgsw.flow.Model.JoinAuth;
 import kr.hs.dgsw.flow.Model.ResponseFormat;
 import kr.hs.dgsw.flow.Network.Network;
@@ -28,7 +27,6 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         getSupportActionBar().hide();
 
-        final DBManager dbManager = new DBManager(getApplicationContext());
 
         final EditText etName = (EditText) findViewById(R.id.etName);
         final EditText etEmail = (EditText) findViewById(R.id.etEmail);
@@ -93,11 +91,7 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     });
 
-                    //database
-                    dbManager.insert("INSERT INTO " +
-                            "register(email,password,name,gender,mobile,class_idx,class_number)" +
-                            " VALUES('" + email + "','" + password + "','" + name + "','" + gender + "','" + tel + "'," + classIdx + "," + classNum + ");" +
-                            "");
+
 
 
                 } else if (!email.matches(emailPattern) && firPassword.equals(re_password)) {

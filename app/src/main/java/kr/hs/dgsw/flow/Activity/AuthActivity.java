@@ -1,7 +1,6 @@
 package kr.hs.dgsw.flow.Activity;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -16,11 +15,10 @@ import android.widget.Toast;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.iid.FirebaseInstanceId;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import kr.hs.dgsw.flow.Common.TokenInfo;
+import kr.hs.dgsw.flow.Database.DBManagerAuth;
 import kr.hs.dgsw.flow.Model.LoginAuth;
 import kr.hs.dgsw.flow.Model.ResponseFormat;
 import kr.hs.dgsw.flow.Network.Network;
@@ -33,12 +31,15 @@ import retrofit.Retrofit;
 public class AuthActivity extends AppCompatActivity {
 
     private FirebaseApp firebaseAuth;
-    TokenInfo tokenInfo = new TokenInfo();
+    public String TOKEN="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
+
+        final DBManagerAuth dbManagerAuth = new DBManagerAuth(getApplicationContext());
+
 
         setContentView(R.layout.activity_auth);
         firebaseAuth = FirebaseApp.getInstance();
@@ -74,9 +75,13 @@ public class AuthActivity extends AppCompatActivity {
                         try {
                             JSONObject obj = new JSONObject(response.body().getData().toString());
 
-                            tokenInfo.Token = obj.getString("token");
+                            TOKEN = obj.getString("token");
 
-                            // 데이터베이스에 값 넣기.
+                            //database
+                            dbManagerAuth.insert("INSERT INTO " +
+                                    "user(token)"+
+                                    " VALUES('" + TOKEN + "');" +
+                                    "");
 
                         } catch (JSONException e) {
                             e.printStackTrace();

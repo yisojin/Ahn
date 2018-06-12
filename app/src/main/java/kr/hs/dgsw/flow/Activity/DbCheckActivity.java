@@ -7,7 +7,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import kr.hs.dgsw.flow.Database.DBManager;
+import kr.hs.dgsw.flow.Database.DBManagerAuth;
 import kr.hs.dgsw.flow.R;
 
 public class DbCheckActivity extends AppCompatActivity {
@@ -22,11 +22,11 @@ public class DbCheckActivity extends AppCompatActivity {
         setContentView(R.layout.activity_db_check);
 
 
-        DBManager dbManager = new DBManager(getApplicationContext());
+        DBManagerAuth dbManagerAuth = new DBManagerAuth(getApplicationContext());
 
         ListView listView = (ListView) findViewById(R.id.listView);
 
-        for(String item: dbManager.PrintData()){
+        for(String item: dbManagerAuth.PrintData()){
             list.add(item);
         }
 

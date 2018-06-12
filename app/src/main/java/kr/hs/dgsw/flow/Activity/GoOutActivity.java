@@ -10,17 +10,12 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TimePicker;
-import android.widget.Toast;
-
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import kr.hs.dgsw.flow.Common.TokenInfo;
+import kr.hs.dgsw.flow.Database.DBManagerAuth;
 import kr.hs.dgsw.flow.Model.GoOut;
 import kr.hs.dgsw.flow.Model.ResponseFormat;
 import kr.hs.dgsw.flow.Network.Network;
@@ -45,10 +40,15 @@ public class GoOutActivity extends AppCompatActivity {
     int flagNum = 0;
     // flag number 이 1 이면 외출, 2면 외박.
 
-    TokenInfo tokenInfo = new TokenInfo();
+    AuthActivity auth = new AuthActivity();
 
     protected void onCreate(Bundle savedInstanceState) {
 
+        final DBManagerAuth dbManagerAuth = new DBManagerAuth(getApplicationContext());
+//
+//        SELECT *
+//                FROM    TABLE
+//        WHERE   ID = (SELECT MAX(ID)  FROM TABLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_go_out);
         getSupportActionBar().hide();
@@ -66,6 +66,74 @@ public class GoOutActivity extends AppCompatActivity {
         final Button btnEndTime = (Button) findViewById(R.id.btnEndTime);
         etReason = (EditText) findViewById(R.id.etReason);
         final Button btnCheck = (Button) findViewById(R.id.btnCheck);
+
+        btnCheck.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+
+                SDATETIME = s();
+                EDATETIME = e();
+                String reason = etReason.getText().toString();
+
+                goOut = new GoOut();
+                goOut.setStart_time("'" + SDATETIME + "'");
+                goOut.setEnd_time("'" + EDATETIME + "'");
+                goOut.setReason(reason);
+
+                Network network = Network.retrofit.create(Network.class);
+
+                switch (flagNum) {
+                    case 1:
+                        Call<ResponseFormat> goCall = network.goout(auth.TOKEN, goOut);
+
+                        String token = auth.TOKEN;
+                        Log.v("token", token);
+
+                        try {
+                            Thread.sleep(10000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        goCall.enqueue(new Callback<ResponseFormat>() {
+                            @Override
+                            public void onResponse(Response<ResponseFormat> response, Retrofit retrofit) {
+                                Log.e("response", response.body().toString());
+
+                            }
+
+                            @Override
+                            public void onFailure(Throwable t) {
+                                Log.e("response", t.getMessage());
+                            }
+                        });
+                        break;
+                    case 2:
+                        Call<ResponseFormat> sleepCall = network.sleepout(auth.TOKEN, goOut);
+
+                        Log.v("token", auth.TOKEN);
+
+                        try {
+                            Thread.sleep(10000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        sleepCall.enqueue(new Callback<ResponseFormat>() {
+                            @Override
+                            public void onResponse(Response<ResponseFormat> response, Retrofit retrofit) {
+                                Log.e("response", response.body().toString());
+                            }
+
+                            @Override
+                            public void onFailure(Throwable t) {
+                                Log.e("response", t.getMessage());
+                            }
+                        });
+                        break;
+                }
+            }
+        });
 
         GregorianCalendar calendar = new GregorianCalendar();
         year = calendar.get(Calendar.YEAR);
@@ -160,59 +228,5 @@ public class GoOutActivity extends AppCompatActivity {
     public String e() {
         return EDATE + " " + ETIME;
     }
-
-    //click event;
-
-    public void buttonOnClick(View view){
-        SDATETIME = s();
-        EDATETIME = e();
-        String reason = etReason.getText().toString();
-
-        goOut = new GoOut();
-        goOut.setStart_time("'" + SDATETIME + "'");
-        goOut.setEnd_time("'" + EDATETIME + "'");
-        goOut.setReason(reason);
-
-        Network network = Network.retrofit.create(Network.class);
-
-        switch (flagNum) {
-            case 1:
-                Call<ResponseFormat> goCall = network.goout(tokenInfo.Token, goOut);
-
-                String token = tokenInfo.Token;
-                Log.v("token", tokenInfo.Token);
-
-                goCall.enqueue(new Callback<ResponseFormat>() {
-                    @Override
-                    public void onResponse(Response<ResponseFormat> response, Retrofit retrofit) {
-                        Log.e("response", response.body().toString());
-                    }
-
-                    @Override
-                    public void onFailure(Throwable t) {
-                        Log.e("response", t.getMessage());
-                    }
-                });
-                break;
-            case 2:
-                Call<ResponseFormat> sleepCall = network.sleepout(tokenInfo.Token, goOut);
-
-                Log.v("token", tokenInfo.Token);
-                sleepCall.enqueue(new Callback<ResponseFormat>() {
-                    @Override
-                    public void onResponse(Response<ResponseFormat> response, Retrofit retrofit) {
-                        Log.e("response", response.body().toString());
-                    }
-
-                    @Override
-                    public void onFailure(Throwable t) {
-                        Log.e("response", t.getMessage());
-                    }
-                });
-                break;
-        }
-
-    }
-
 }
 

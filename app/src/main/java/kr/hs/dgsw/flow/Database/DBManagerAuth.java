@@ -11,25 +11,19 @@ import java.util.ArrayList;
  * Created by leesojin on 2018. 4. 2..
  */
 
-public class DBManager extends SQLiteOpenHelper {
+public class DBManagerAuth extends SQLiteOpenHelper {
 
 
-    public DBManager(Context context) {
+    public DBManagerAuth(Context context) {
         super(context, "flow.db", null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("" +
-                "CREATE TABLE register(" +
+                "CREATE TABLE user(" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "email TEXT NOT NULL, " +
-                "password TEXT NOT NULL, " +
-                "name TEXT NOT NULL, " +
-                "gender TEXT NOT NULL," +
-                "mobile TEXT NOT NULL," +
-                "class_idx INTEGER NOT NULL," +
-                "class_number INTEGER NOT NULL" +
+                "token TEXT NOT NULL " +
                 ");" +
                 "");
 
@@ -46,15 +40,11 @@ public class DBManager extends SQLiteOpenHelper {
 
         SQLiteDatabase db = getWritableDatabase();
 
-        db.execSQL("CREATE TABLE IF NOT EXISTS register("+ "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "email TEXT NOT NULL, " +
-                "password TEXT NOT NULL, " +
-                "name TEXT NOT NULL, " +
-                "gender TEXT NOT NULL," +
-                "mobile TEXT NOT NULL," +
-                "class_idx INTEGER NOT NULL," +
-                "class_number INTEGER NOT NULL" +
-                ");" +"");
+        db.execSQL("CREATE TABLE IF NOT EXISTS user(" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "token TEXT NOT NULL " +
+                ");" +
+                "");
 
         db.execSQL(qur);
         db.close();
@@ -68,10 +58,21 @@ public class DBManager extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         ArrayList<String> list = new ArrayList<String>();
 
-        Cursor cursor = db.rawQuery("select * from register",null);
+        Cursor cursor = db.rawQuery("select * from user",null);
         while(cursor.moveToNext()){
             list.add(cursor.getString(1));
         }
         return list;
+    }
+    public void getLast(String sql){
+
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("CREATE TABLE IF NOT EXISTS user(" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "token TEXT NOT NULL " +
+                ");" +"");
+        db.execSQL(sql);
+        db.close();
+
     }
 }
