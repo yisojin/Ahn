@@ -16,6 +16,11 @@ import android.widget.Toast;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import kr.hs.dgsw.flow.Common.TokenInfo;
 import kr.hs.dgsw.flow.Model.LoginAuth;
 import kr.hs.dgsw.flow.Model.ResponseFormat;
 import kr.hs.dgsw.flow.Network.Network;
@@ -28,10 +33,13 @@ import retrofit.Retrofit;
 public class AuthActivity extends AppCompatActivity {
 
     private FirebaseApp firebaseAuth;
+    TokenInfo tokenInfo = new TokenInfo();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
+
         setContentView(R.layout.activity_auth);
         firebaseAuth = FirebaseApp.getInstance();
         css();
@@ -63,12 +71,23 @@ public class AuthActivity extends AppCompatActivity {
                         Log.e("response", response.body().toString());
                         Log.e("status",Integer.toString(response.body().getStatus()));
 
+                        try {
+                            JSONObject obj = new JSONObject(response.body().getData().toString());
+
+                            tokenInfo.Token = obj.getString("token");
+
+                            // 데이터베이스에 값 넣기.
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
                         if(response.body().getStatus() == 401){
                             Toast.makeText(AuthActivity.this,"아이디나 비밀번호가 일치하지 않습니다.",Toast.LENGTH_SHORT);
                         }
                         else if(response.body().getStatus() == 400){
                             Toast.makeText(AuthActivity.this,"해당 계정이 존재하지 않습니다.",Toast.LENGTH_SHORT);
-
                         }
 
                         Intent intent = new Intent(AuthActivity.this, MainActivity.class);

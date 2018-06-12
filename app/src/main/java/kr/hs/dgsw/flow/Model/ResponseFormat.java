@@ -9,6 +9,7 @@ public class ResponseFormat {
     private String message;
     private Object data;
 
+
     @Override
     public String toString() {
         return "ResponseFormat{" +
@@ -41,4 +42,5 @@ public class ResponseFormat {
     public void setData(Object data) {
         this.data = data;
     }
+
 }
