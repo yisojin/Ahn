@@ -39,16 +39,11 @@ public class GoOutActivity extends AppCompatActivity {
     GoOut goOut;
     int flagNum = 0;
     // flag number 이 1 이면 외출, 2면 외박.
-
-    AuthActivity auth = new AuthActivity();
+    DBManagerAuth auth = new DBManagerAuth(getApplicationContext());
 
     protected void onCreate(Bundle savedInstanceState) {
 
-        final DBManagerAuth dbManagerAuth = new DBManagerAuth(getApplicationContext());
-//
-//        SELECT *
-//                FROM    TABLE
-//        WHERE   ID = (SELECT MAX(ID)  FROM TABLE);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_go_out);
         getSupportActionBar().hide();
@@ -67,7 +62,7 @@ public class GoOutActivity extends AppCompatActivity {
         etReason = (EditText) findViewById(R.id.etReason);
         final Button btnCheck = (Button) findViewById(R.id.btnCheck);
 
-        btnCheck.setOnClickListener(new View.OnClickListener(){
+        btnCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -83,12 +78,14 @@ public class GoOutActivity extends AppCompatActivity {
 
                 Network network = Network.retrofit.create(Network.class);
 
+                String token = auth.getLast();
+
+
                 switch (flagNum) {
                     case 1:
-                        Call<ResponseFormat> goCall = network.goout(auth.TOKEN, goOut);
+                        Call<ResponseFormat> goCall = network.goout(token, goOut);
 
-                        String token = auth.TOKEN;
-                        Log.v("token", token);
+                        String a = token;
 
                         try {
                             Thread.sleep(10000);
@@ -110,9 +107,7 @@ public class GoOutActivity extends AppCompatActivity {
                         });
                         break;
                     case 2:
-                        Call<ResponseFormat> sleepCall = network.sleepout(auth.TOKEN, goOut);
-
-                        Log.v("token", auth.TOKEN);
+                        Call<ResponseFormat> sleepCall = network.sleepout(token, goOut);
 
                         try {
                             Thread.sleep(10000);

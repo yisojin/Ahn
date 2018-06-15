@@ -18,8 +18,10 @@ public class DBManagerApplication extends SQLiteOpenHelper {
         db.execSQL("" +
                 "CREATE TABLE application(" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "kind TEXT NOT NULL " +
-                " "+
+                "kind TEXT NOT NULL, " +
+                "start_time DATETIME NOT NULL, "+
+                "end_time DATETIME NOT NULL,"+
+                "reason TEXT NOT NULL"+
                 ");" +
                 "");
 
@@ -29,5 +31,21 @@ public class DBManagerApplication extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
 
+    }
+    public void insert(String qur){
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.execSQL("" +
+                "CREATE TABLE application(" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "kind TEXT NOT NULL, " +
+                "start_time DATETIME NOT NULL, "+
+                "end_time DATETIME NOT NULL,"+
+                "reason TEXT NOT NULL"+
+                ");" +
+                "");
+
+        db.execSQL(qur);
+        db.close();
     }
 }

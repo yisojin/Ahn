@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 public class DBManagerAuth extends SQLiteOpenHelper {
 
-
     public DBManagerAuth(Context context) {
         super(context, "flow.db", null, 1);
     }
@@ -64,15 +63,22 @@ public class DBManagerAuth extends SQLiteOpenHelper {
         }
         return list;
     }
-    public void getLast(String sql){
+    public String getLast(){
 
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("CREATE TABLE IF NOT EXISTS user(" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "token TEXT NOT NULL " +
-                ");" +"");
-        db.execSQL(sql);
-        db.close();
+        String token="";
+        Cursor cursor = db.rawQuery("select * from user order by token desc limit 1", null);
+        while(cursor.moveToLast()){
+            token = cursor.getString(2);
+        }
+        return token;
+//        db.execSQL("CREATE TABLE IF NOT EXISTS user(" +
+//                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+//                "token TEXT NOT NULL " +
+//                ");" +"");
+//        db.execSQL(sql);
+//        db.close();
+//        SELECT * FROM user ORDER BY token DESC limit 1;
 
     }
 }
