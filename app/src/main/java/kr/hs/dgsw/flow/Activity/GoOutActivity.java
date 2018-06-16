@@ -39,10 +39,10 @@ public class GoOutActivity extends AppCompatActivity {
     GoOut goOut;
     int flagNum = 0;
     // flag number 이 1 이면 외출, 2면 외박.
-    DBManagerAuth auth = new DBManagerAuth(getApplicationContext());
 
     protected void onCreate(Bundle savedInstanceState) {
 
+    final DBManagerAuth auth = new DBManagerAuth(getApplicationContext());
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_go_out);
