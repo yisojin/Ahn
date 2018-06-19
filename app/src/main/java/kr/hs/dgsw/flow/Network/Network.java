@@ -29,18 +29,18 @@ public interface Network {
 
     //go out
     @POST("out/go")
-    Call<ResponseFormat> goout(@Header("Authorization") String Token, @Body GoOut goOut);
+    Call<ResponseFormat> goout(@Header("x-access-token") String Token, @Body GoOut goOut);
 
     //sleep out
     @POST("out/sleep")
-    Call<ResponseFormat> sleepout(@Header("Authorization") String Token, @Body GoOut goOut);
+    Call<ResponseFormat> sleepout(@Header("x-access-token") String Token, @Body GoOut goOut);
 
     //공지
     @GET("/notice")
-    Call<ResponseFormat> list(@Header("Authorization")String token);
+    Call<ResponseFormat> list(@Header("x-access-token")String token);
 
     @GET("/notice/{idx}") //notice idx 값 받기
-    Call<ResponseFormat> view(@Header("Authorizatoin")String token);
+    Call<ResponseFormat> view(@Header("x-access-token")String token);
 
 
     public static final Retrofit retrofit = new Retrofit.Builder()
@@ -48,3 +48,4 @@ public interface Network {
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 }
+

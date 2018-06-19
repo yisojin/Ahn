@@ -83,6 +83,13 @@ public class GoOutActivity extends AppCompatActivity {
                     case 1:
                         Call<ResponseFormat> goCall = network.goout(token, goOut);
 
+
+                        try {
+                            Thread.sleep(3000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
                         goCall.enqueue(new Callback<ResponseFormat>() {
                             @Override
                             public void onResponse(Response<ResponseFormat> response, Retrofit retrofit) {
@@ -169,7 +176,19 @@ public class GoOutActivity extends AppCompatActivity {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
             month += 1;
-            SDATE = year + "-" + month + "-" + dayOfMonth;
+            String mmmm = "";
+            String dddd = "";
+            if(month<10){
+                mmmm = "0"+month;
+            }else{
+                mmmm = month+"";
+            }
+            if(dayOfMonth<10){
+                dddd = "0"+dayOfMonth;
+            }else{
+                dddd = dayOfMonth+"";
+            }
+            SDATE = year + "-" + mmmm + "-" + dddd;
         }
 
     };
@@ -177,6 +196,18 @@ public class GoOutActivity extends AppCompatActivity {
     private TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            String hhhh="";
+            String mmmm  ="";
+            if(hourOfDay<10){
+                hhhh = "0"+hourOfDay;
+            }else{
+                hhhh=hourOfDay+"";
+            }
+            if (minute < 10) {
+                mmmm = "0"+minute;
+            }else{
+                mmmm = minute+"";
+            }
             STIME = hourOfDay + ":" + minute;
         }
     };
@@ -186,7 +217,19 @@ public class GoOutActivity extends AppCompatActivity {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
             month += 1;
-            EDATE = year + "-" + month + "-" + dayOfMonth;
+            String mmmm = "";
+            String dddd = "";
+            if(month<10){
+                mmmm = "0"+month;
+            }else{
+                mmmm = month+"";
+            }
+            if(dayOfMonth<10){
+                dddd = "0"+dayOfMonth;
+            }else{
+                dddd = dayOfMonth+"";
+            }
+            EDATE = year + "-" + mmmm + "-" + dddd;
         }
 
     };
@@ -194,6 +237,18 @@ public class GoOutActivity extends AppCompatActivity {
     private TimePickerDialog.OnTimeSetListener EtimeSetListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            String hhhh="";
+            String mmmm  ="";
+            if(hourOfDay<10){
+                hhhh = "0"+hourOfDay;
+            }else{
+                hhhh = hourOfDay+"";
+            }
+            if (minute < 10) {
+                mmmm = "0"+minute;
+            }else{
+                mmmm = minute+"";
+            }
             ETIME = hourOfDay + ":" + minute;
         }
     };
