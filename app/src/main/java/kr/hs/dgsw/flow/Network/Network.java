@@ -8,6 +8,8 @@ import retrofit.Call;
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 import retrofit.http.Body;
+import retrofit.http.GET;
+import retrofit.http.HEAD;
 import retrofit.http.Header;
 import retrofit.http.POST;
 
@@ -32,6 +34,14 @@ public interface Network {
     //sleep out
     @POST("out/sleep")
     Call<ResponseFormat> sleepout(@Header("Authorization") String Token, @Body GoOut goOut);
+
+    //공지
+    @GET("/notice")
+    Call<ResponseFormat> list(@Header("Authorization")String token);
+
+    @GET("/notice/{idx}") //notice idx 값 받기
+    Call<ResponseFormat> view(@Header("Authorizatoin")String token);
+
 
     public static final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("http://flow.cafe24app.com/")

@@ -29,13 +29,12 @@ public class DBManagerAuth extends SQLiteOpenHelper {
     }
 
 
-
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
 
-    public void insert(String qur){
+    public void insert(String qur) {
 
         SQLiteDatabase db = getWritableDatabase();
 
@@ -48,30 +47,37 @@ public class DBManagerAuth extends SQLiteOpenHelper {
         db.execSQL(qur);
         db.close();
     }
-    public void delete(String qur){
+
+    public void delete(String qur) {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL(qur);
         db.close();
     }
-    public ArrayList<String> PrintData(){
+
+    public ArrayList<String> PrintData() {
         SQLiteDatabase db = getWritableDatabase();
         ArrayList<String> list = new ArrayList<String>();
 
-        Cursor cursor = db.rawQuery("select * from user",null);
-        while(cursor.moveToNext()){
+        Cursor cursor = db.rawQuery("select * from user", null);
+        while (cursor.moveToNext()) {
             list.add(cursor.getString(1));
         }
         return list;
     }
-    public String getLast(){
+
+    public String getLast() {
 
         SQLiteDatabase db = getWritableDatabase();
-        String token="";
-        Cursor cursor = db.rawQuery("select * from user order by token desc limit 1", null);
-        while(cursor.moveToLast()){
-            token = cursor.getString(2);
-        }
+
+        String token = "";
+
+        Cursor cursor = db.rawQuery("select * from user ", null);
+        //order by token asc limit 1
+while(cursor.moveToNext()) {
+    token = cursor.getString(1);
+}
         return token;
+
 //        db.execSQL("CREATE TABLE IF NOT EXISTS user(" +
 //                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
 //                "token TEXT NOT NULL " +

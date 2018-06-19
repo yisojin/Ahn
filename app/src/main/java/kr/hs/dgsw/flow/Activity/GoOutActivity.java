@@ -42,7 +42,7 @@ public class GoOutActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
 
-    final DBManagerAuth auth = new DBManagerAuth(getApplicationContext());
+        final DBManagerAuth auth = new DBManagerAuth(getApplicationContext());
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_go_out);
@@ -53,7 +53,6 @@ public class GoOutActivity extends AppCompatActivity {
 
         go.setOnClickListener(radioBtnClick);
         sleep.setOnClickListener(radioBtnClick);
-
 
         final Button btnStartDate = (Button) findViewById(R.id.btnStartDate);
         final Button btnStartTime = (Button) findViewById(R.id.btnStartTime);
@@ -80,18 +79,9 @@ public class GoOutActivity extends AppCompatActivity {
 
                 String token = auth.getLast();
 
-
                 switch (flagNum) {
                     case 1:
                         Call<ResponseFormat> goCall = network.goout(token, goOut);
-
-                        String a = token;
-
-                        try {
-                            Thread.sleep(10000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
 
                         goCall.enqueue(new Callback<ResponseFormat>() {
                             @Override
@@ -109,11 +99,6 @@ public class GoOutActivity extends AppCompatActivity {
                     case 2:
                         Call<ResponseFormat> sleepCall = network.sleepout(token, goOut);
 
-                        try {
-                            Thread.sleep(10000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
                         sleepCall.enqueue(new Callback<ResponseFormat>() {
                             @Override
                             public void onResponse(Response<ResponseFormat> response, Retrofit retrofit) {
