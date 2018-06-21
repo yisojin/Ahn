@@ -1,14 +1,9 @@
 회원가입시 비밀번호 특수문자 필수
 (password validation)
 
-db에 저장된 토큰 받아오기
-토큰이 제대로 들어왔는지 확인.
-외출 외박 네트워크 부분 헤더에 x-access-token 보내기
-
 외출 외박시 application db 에 저장 (idx, type, startTime, endTime, reason)
 
 외출 외박 허가시 fcm 알림 앱 에 뱃지 띄우기
-공지 페이지 구현.
 
 공지읽기만 가능
 공지 업데이트시 알람

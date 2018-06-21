@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnMeal = (Button) findViewById(R.id.btnMeal);
         Button btnApplication = (Button) findViewById(R.id.btnApplication);
+        Button btnNotice = (Button) findViewById(R.id.btnNotice);
 
 
         btnApplication.setOnClickListener(new View.OnClickListener() {
@@ -34,6 +35,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, MealActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnNotice.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, NoticeActivity.class);
                 startActivity(intent);
             }
         });

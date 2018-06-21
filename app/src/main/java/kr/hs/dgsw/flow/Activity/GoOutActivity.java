@@ -71,9 +71,9 @@ public class GoOutActivity extends AppCompatActivity {
                 String reason = etReason.getText().toString();
 
                 goOut = new GoOut();
-                goOut.setStart_time("'" + SDATETIME + "'");
-                goOut.setEnd_time("'" + EDATETIME + "'");
-                goOut.setReason(reason);
+                goOut.setStart_time( SDATETIME );
+                goOut.setEnd_time(EDATETIME);
+                goOut.setReason("\""+reason+"\"");
 
                 Network network = Network.retrofit.create(Network.class);
 

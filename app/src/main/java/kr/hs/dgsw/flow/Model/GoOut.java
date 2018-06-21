@@ -1,5 +1,7 @@
 package kr.hs.dgsw.flow.Model;
 
+import java.util.Date;
+
 /**
  * Created by leesojin on 2018. 4. 23..
  */
