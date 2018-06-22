@@ -15,6 +15,7 @@ public class DBManagerAuth extends SQLiteOpenHelper {
 
     public DBManagerAuth(Context context) {
         super(context, "flow.db", null, 1);
+
     }
 
     @Override
@@ -71,11 +72,11 @@ public class DBManagerAuth extends SQLiteOpenHelper {
 
         String token = "";
 
-        Cursor cursor = db.rawQuery("select * from user ", null);
+        Cursor cursor = db.rawQuery("select * from user order by token asc limit 1", null);
         //order by token asc limit 1
-while(cursor.moveToNext()) {
-    token = cursor.getString(1);
-}
+        while (cursor.moveToNext()) {
+            token = cursor.getString(1);
+        }
         return token;
 
 //        db.execSQL("CREATE TABLE IF NOT EXISTS user(" +

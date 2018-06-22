@@ -2,6 +2,7 @@ package kr.hs.dgsw.flow.Activity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +16,7 @@ import android.widget.TimePicker;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import kr.hs.dgsw.flow.Database.DBManagerApplication;
 import kr.hs.dgsw.flow.Database.DBManagerAuth;
 import kr.hs.dgsw.flow.Model.GoOut;
 import kr.hs.dgsw.flow.Model.ResponseFormat;
@@ -43,6 +45,7 @@ public class GoOutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         final DBManagerAuth auth = new DBManagerAuth(getApplicationContext());
+        final DBManagerApplication application = new DBManagerApplication(getApplicationContext());
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_go_out);
@@ -68,12 +71,12 @@ public class GoOutActivity extends AppCompatActivity {
 
                 SDATETIME = s();
                 EDATETIME = e();
-                String reason = etReason.getText().toString();
+                final String reason = etReason.getText().toString();
 
                 goOut = new GoOut();
-                goOut.setStart_time( SDATETIME );
+                goOut.setStart_time(SDATETIME);
                 goOut.setEnd_time(EDATETIME);
-                goOut.setReason("\""+reason+"\"");
+                goOut.setReason("\'"+reason+"\'");
 
                 Network network = Network.retrofit.create(Network.class);
 
@@ -85,7 +88,7 @@ public class GoOutActivity extends AppCompatActivity {
 
 
                         try {
-                            Thread.sleep(3000);
+                            Thread.sleep(10000);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -95,6 +98,12 @@ public class GoOutActivity extends AppCompatActivity {
                             public void onResponse(Response<ResponseFormat> response, Retrofit retrofit) {
                                 Log.e("response", response.body().toString());
 
+                                if(response.body().getStatus() == 200){
+                                    //success
+                                    application.insert("INSERT INTO application(kind,start_time,end_time,reason) VALUES(\'외출\',"+SDATETIME+","+EDATETIME+",\'"+reason+"\'");
+                                    Intent intent = new Intent(GoOutActivity.this, TestGoOutActivity.class);
+                                    startActivity(intent);
+                                }
                             }
 
                             @Override
