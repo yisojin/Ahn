@@ -6,4 +6,11 @@
     android:layout_height="match_parent"
     tools:context="kr.hs.dgsw.flow.Activity.NoticeActivity">
 
+    <ListView
+        android:id="@+id/lvNotice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
 </android.support.constraint.ConstraintLayout>

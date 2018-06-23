@@ -12,6 +12,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -73,10 +74,11 @@ public class GoOutActivity extends AppCompatActivity {
                 EDATETIME = e();
                 final String reason = etReason.getText().toString();
 
+//                chris: 소진이 윈도우 안켜
                 goOut = new GoOut();
                 goOut.setStart_time(SDATETIME);
                 goOut.setEnd_time(EDATETIME);
-                goOut.setReason("\'"+reason+"\'");
+                goOut.setReason(reason);
 
                 Network network = Network.retrofit.create(Network.class);
 
@@ -100,9 +102,18 @@ public class GoOutActivity extends AppCompatActivity {
 
                                 if(response.body().getStatus() == 200){
                                     //success
-                                    application.insert("INSERT INTO application(kind,start_time,end_time,reason) VALUES(\'외출\',"+SDATETIME+","+EDATETIME+",\'"+reason+"\'");
+                                    application.insert("INSERT INTO application(kind,start_time,end_time,reason) VALUES(\'외출\',\'"+SDATETIME+"\',\'"+EDATETIME+"\',\'"+reason+"\'");
                                     Intent intent = new Intent(GoOutActivity.this, TestGoOutActivity.class);
                                     startActivity(intent);
+                                }
+                                if(response.body().getStatus() == 409){
+                                    Toast.makeText(GoOutActivity.this, "이미 신청 하셨습니다.", Toast.LENGTH_SHORT).show();
+                                }
+                                if(response.body().getStatus() == 412){
+                                    Toast.makeText(GoOutActivity.this,"신청 날짜가 유효하지 않습니다",Toast.LENGTH_SHORT).show();
+                                }
+                                if(response.body().getStatus() == 400){
+                                    Toast.makeText(GoOutActivity.this, "입력양식을 맞춰주세요.", Toast.LENGTH_SHORT).show();
                                 }
                             }
 
