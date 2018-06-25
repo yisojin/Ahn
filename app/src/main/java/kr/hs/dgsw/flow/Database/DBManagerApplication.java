@@ -39,7 +39,7 @@ public class DBManagerApplication extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
 
         db.execSQL("" +
-                "CREATE TABLE application(" +
+                "CREATE TABLE IF NOT EXISTS application(" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "kind TEXT NOT NULL, " +
                 "start_time DATETIME NOT NULL, "+

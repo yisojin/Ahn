@@ -1,12 +1,8 @@
 회원가입시 비밀번호 특수문자 필수
 (password validation)
 
-외출 외박시 application db 에 저장 (idx, type, startTime, endTime, reason)
-
-외출 외박 허가시 fcm 알림 앱 에 뱃지 띄우기
-
 공지읽기만 가능
-공지 업데이트시 알람
+공지 업데이트시 알람 noti
 공지 파일 다운로드 기능
 기존 글자수 20자 더보기로 view
 badge noti

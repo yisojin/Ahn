@@ -6,6 +6,10 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +18,7 @@ import kr.hs.dgsw.flow.Model.GoOut;
 import kr.hs.dgsw.flow.Model.JoinAuth;
 import kr.hs.dgsw.flow.Model.LoginAuth;
 import kr.hs.dgsw.flow.Model.ResponseFormat;
+import kr.hs.dgsw.flow.Model.ResponseFormatNotice;
 import kr.hs.dgsw.flow.Network.Network;
 import kr.hs.dgsw.flow.R;
 import retrofit.Call;
@@ -33,19 +38,18 @@ public class NoticeActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         ListView listView = (ListView) findViewById(R.id.lvNotice);
+        final List<JSONObject> Jlist = new ArrayList<JSONObject>();
 
         final DBManagerAuth auth = new DBManagerAuth(getApplicationContext());
 
         final Network network = Network.retrofit.create(Network.class);
-        Call<ResponseFormat> call = network.list(auth.getLast());
-        call.enqueue(new Callback<ResponseFormat>() {
+        Call<ResponseFormatNotice> call = network.list(auth.getLast());
+        call.enqueue(new Callback<ResponseFormatNotice>() {
             @Override
-            public void onResponse(Response<ResponseFormat> response, Retrofit retrofit) {
-                Log.e("list", response.body().getData().toString());
+            public void onResponse(Response<ResponseFormatNotice> response, Retrofit retrofit) {
+                Log.e("list", response.body().toString());
+
                 list.add(response.body().getData().toString());
-//                for(String item:){
-//                    list.add(item);
-//                }
 
             }
 

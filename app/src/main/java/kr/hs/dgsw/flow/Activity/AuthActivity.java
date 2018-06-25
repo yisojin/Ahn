@@ -39,7 +39,7 @@ public class AuthActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         final DBManagerAuth dbManagerAuth = new DBManagerAuth(getApplicationContext());
-
+        dbManagerAuth.deleteAll();
 
         setContentView(R.layout.activity_auth);
         firebaseAuth = FirebaseApp.getInstance();

@@ -28,12 +28,12 @@ public class DbCheckActivity extends AppCompatActivity {
 
         ListView listView = (ListView) findViewById(R.id.listView);
 
-//        for(String item: dbManagerAuth.PrintData()){
-//            list.add(item);
-//        }
-        for(String item: dbManagerApplication.PrintData()){
+        for(String item: dbManagerAuth.PrintData()){
             list.add(item);
         }
+//        for(String item: dbManagerApplication.PrintData()){
+//            list.add(item);
+//        }
 
         adapter = new ArrayAdapter<String>(this,R.layout.list_item,R.id.text1,list);
 

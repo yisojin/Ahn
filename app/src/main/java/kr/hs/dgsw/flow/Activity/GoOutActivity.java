@@ -14,6 +14,8 @@ import android.widget.RadioButton;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.firebase.messaging.FirebaseMessaging;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -74,7 +76,6 @@ public class GoOutActivity extends AppCompatActivity {
                 EDATETIME = e();
                 final String reason = etReason.getText().toString();
 
-//                chris: 소진이 윈도우 안켜
                 goOut = new GoOut();
                 goOut.setStart_time(SDATETIME);
                 goOut.setEnd_time(EDATETIME);
@@ -88,13 +89,6 @@ public class GoOutActivity extends AppCompatActivity {
                     case 1:
                         Call<ResponseFormat> goCall = network.goout(token, goOut);
 
-
-                        try {
-                            Thread.sleep(10000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-
                         goCall.enqueue(new Callback<ResponseFormat>() {
                             @Override
                             public void onResponse(Response<ResponseFormat> response, Retrofit retrofit) {
@@ -102,7 +96,7 @@ public class GoOutActivity extends AppCompatActivity {
 
                                 if(response.body().getStatus() == 200){
                                     //success
-                                    application.insert("INSERT INTO application(kind,start_time,end_time,reason) VALUES(\'외출\',\'"+SDATETIME+"\',\'"+EDATETIME+"\',\'"+reason+"\'");
+                                    application.insert("INSERT INTO application(kind,start_time,end_time,reason) VALUES(\'외출\',\'"+SDATETIME+"\',\'"+EDATETIME+"\',\'"+reason+"\');");
                                     Intent intent = new Intent(GoOutActivity.this, TestGoOutActivity.class);
                                     startActivity(intent);
                                 }

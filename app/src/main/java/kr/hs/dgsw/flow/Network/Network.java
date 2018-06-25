@@ -4,6 +4,7 @@ import kr.hs.dgsw.flow.Model.GoOut;
 import kr.hs.dgsw.flow.Model.JoinAuth;
 import kr.hs.dgsw.flow.Model.LoginAuth;
 import kr.hs.dgsw.flow.Model.ResponseFormat;
+import kr.hs.dgsw.flow.Model.ResponseFormatNotice;
 import retrofit.Call;
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
@@ -37,10 +38,10 @@ public interface Network {
 
     //공지
     @GET("/notice")
-    Call<ResponseFormat> list(@Header("x-access-token")String token);
+    Call<ResponseFormatNotice> list(@Header("x-access-token")String token);
 
     @GET("/notice/{idx}") //notice idx 값 받기
-    Call<ResponseFormat> view(@Header("x-access-token")String token);
+    Call<ResponseFormatNotice> view(@Header("x-access-token")String token);
 
 
     public static final Retrofit retrofit = new Retrofit.Builder()

@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.messaging.FirebaseMessaging;
+
 import kr.hs.dgsw.flow.Model.GoOut;
 import kr.hs.dgsw.flow.R;
 
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         Button btnNotice = (Button) findViewById(R.id.btnNotice);
         Button btnDB = (Button) findViewById(R.id.btnDatabase);
 
+        FirebaseMessaging.getInstance().subscribeToTopic("notice");
 
         btnApplication.setOnClickListener(new View.OnClickListener() {
             @Override

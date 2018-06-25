@@ -35,6 +35,12 @@ public class DBManagerAuth extends SQLiteOpenHelper {
 
     }
 
+    public void deleteAll(){
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("delete from user");
+        db.close();
+    }
+
     public void insert(String qur) {
 
         SQLiteDatabase db = getWritableDatabase();
