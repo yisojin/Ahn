@@ -17,6 +17,8 @@ import kr.hs.dgsw.flow.Database.DBManagerAuth;
 import kr.hs.dgsw.flow.Model.GoOut;
 import kr.hs.dgsw.flow.Model.JoinAuth;
 import kr.hs.dgsw.flow.Model.LoginAuth;
+import kr.hs.dgsw.flow.Model.Notice;
+import kr.hs.dgsw.flow.Model.NoticeListData;
 import kr.hs.dgsw.flow.Model.ResponseFormat;
 import kr.hs.dgsw.flow.Model.ResponseFormatNotice;
 import kr.hs.dgsw.flow.Network.Network;
@@ -43,13 +45,25 @@ public class NoticeActivity extends AppCompatActivity {
         final DBManagerAuth auth = new DBManagerAuth(getApplicationContext());
 
         final Network network = Network.retrofit.create(Network.class);
+        Log.e("token", ">> " + auth.getLast());
         Call<ResponseFormatNotice> call = network.list(auth.getLast());
         call.enqueue(new Callback<ResponseFormatNotice>() {
             @Override
             public void onResponse(Response<ResponseFormatNotice> response, Retrofit retrofit) {
-                Log.e("list", response.body().toString());
+                Log.e("list", response.message());
 
-                list.add(response.body().getData().toString());
+
+//                List<Notice> lst = new ArrayList<Notice>();
+//                for(Notice n : response.body().getData().getList()){
+//                    lst.add(n);
+//
+//                    Log.e("data",n.toString());
+//                }
+
+//                Log.e("data",);
+
+
+//                list.add(response.body().getData().toString());
 
             }
 

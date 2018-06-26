@@ -1,5 +1,9 @@
 package kr.hs.dgsw.flow.Model;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
 /**
  * Created by leesojin on 2018. 6. 25..
  */
@@ -7,16 +11,7 @@ package kr.hs.dgsw.flow.Model;
 public class ResponseFormatNotice {
     private int status;
     private String message;
-    private Notice data;
-
-    @Override
-    public String toString() {
-        return "ResponseFormatNotice{" +
-                "status=" + status +
-                ", message='" + message + '\'' +
-                ", data=" + data +
-                '}';
-    }
+    private NoticeListData data;
 
     public int getStatus() {
         return status;
@@ -34,11 +29,20 @@ public class ResponseFormatNotice {
         this.message = message;
     }
 
-    public Notice getData() {
+    @Override
+    public String toString() {
+        return "ResponseFormatNotice{" +
+                "status=" + status +
+                ", message='" + message + '\'' +
+                ", data=" + data +
+                '}';
+    }
+
+    public NoticeListData getData() {
         return data;
     }
 
-    public void setData(Notice data) {
+    public void setData(NoticeListData data) {
         this.data = data;
     }
 }

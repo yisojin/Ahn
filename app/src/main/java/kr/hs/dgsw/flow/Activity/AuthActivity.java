@@ -62,7 +62,7 @@ public class AuthActivity extends AppCompatActivity {
                 user.setPw(password);
                 user.setRegistration_token(FirebaseInstanceId.getInstance().getToken());
 
-                Log.v("token",FirebaseInstanceId.getInstance().getToken());
+//                Log.v("token",FirebaseInstanceId.getInstance().getToken());
 
                 final Network network = Network.retrofit.create(Network.class);
                 Call<ResponseFormat> call = network.signin(user);
@@ -72,21 +72,23 @@ public class AuthActivity extends AppCompatActivity {
                         Log.e("response", response.body().toString());
                         Log.e("status",Integer.toString(response.body().getStatus()));
 
-                        try {
-                            JSONObject obj = new JSONObject(response.body().getData().toString());
+                        if(response.body().getStatus() == 200){
+                            try {
 
-                            TOKEN = obj.getString("token");
+                                JSONObject obj = new JSONObject(response.body().getData().toString());
 
-                            //database
-                            dbManagerAuth.insert("INSERT INTO " +
-                                    "user(token)"+
-                                    " VALUES('" + TOKEN + "');" +
-                                    "");
+                                TOKEN = obj.getString("token");
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                                //database
+                                dbManagerAuth.insert("INSERT INTO " +
+                                        "user(token)"+
+                                        " VALUES('" + TOKEN + "');" +
+                                        "");
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
-
 
                         if(response.body().getStatus() == 401){
                             Toast.makeText(AuthActivity.this,"아이디나 비밀번호가 일치하지 않습니다.",Toast.LENGTH_SHORT);

@@ -2,11 +2,7 @@ package kr.hs.dgsw.flow.Model;
 
 import java.util.Date;
 
-/**
- * Created by leesojin on 2018. 6. 25..
- */
-
-public class Notice {
+public class list {
     private int idx;
     private String content;
     private String writer;
@@ -16,7 +12,7 @@ public class Notice {
 
     @Override
     public String toString() {
-        return "Notice{" +
+        return "list{" +
                 "idx=" + idx +
                 ", content='" + content + '\'' +
                 ", writer='" + writer + '\'' +

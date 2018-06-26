@@ -25,8 +25,6 @@ public class MainActivity extends AppCompatActivity {
         Button btnNotice = (Button) findViewById(R.id.btnNotice);
         Button btnDB = (Button) findViewById(R.id.btnDatabase);
 
-        FirebaseMessaging.getInstance().subscribeToTopic("notice");
-
         btnApplication.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
