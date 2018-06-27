@@ -1,4 +1,4 @@
-package kr.hs.dgsw.flow;
+package kr.hs.dgsw.flow.FCM;
 
 import android.util.Log;
 
