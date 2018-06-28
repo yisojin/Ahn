@@ -15,7 +15,6 @@ public class DBManagerAuth extends SQLiteOpenHelper {
 
     public DBManagerAuth(Context context) {
         super(context, "flow.db", null, 1);
-        deleteAll();
 
     }
 
@@ -36,16 +35,13 @@ public class DBManagerAuth extends SQLiteOpenHelper {
 
     }
 
-    public void deleteAll(){
-        SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("delete from user");
-    }
 
     public void insert(String qur) {
 
         SQLiteDatabase db = getWritableDatabase();
 
-        db.execSQL("CREATE TABLE IF NOT EXISTS user(" +
+        db.execSQL(
+                "CREATE TABLE IF NOT EXISTS user(" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "token TEXT NOT NULL " +
                 ");" +

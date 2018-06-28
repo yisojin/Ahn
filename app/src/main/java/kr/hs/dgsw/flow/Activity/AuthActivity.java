@@ -14,11 +14,13 @@ import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import kr.hs.dgsw.flow.Database.DBManagerAuth;
+import kr.hs.dgsw.flow.FCM.MyFirebaseInstanceIDService;
 import kr.hs.dgsw.flow.Model.LoginAuth;
 import kr.hs.dgsw.flow.Model.ResponseFormat;
 import kr.hs.dgsw.flow.Network.Network;
@@ -30,7 +32,7 @@ import retrofit.Retrofit;
 
 public class AuthActivity extends AppCompatActivity {
 
-    private FirebaseApp firebaseAuth;
+    MyFirebaseInstanceIDService firebaseInstanceIDService;
     public String TOKEN="";
 
     @Override
@@ -41,7 +43,6 @@ public class AuthActivity extends AppCompatActivity {
         final DBManagerAuth dbManagerAuth = new DBManagerAuth(getApplicationContext());
 
         setContentView(R.layout.activity_auth);
-        firebaseAuth = FirebaseApp.getInstance();
         css();
 
         final EditText etEmail = (EditText) findViewById(R.id.etEmail);
@@ -60,6 +61,8 @@ public class AuthActivity extends AppCompatActivity {
                 user.setEmail(email);
                 user.setPw(password);
                 user.setRegistration_token(FirebaseInstanceId.getInstance().getToken());
+                FirebaseMessaging.getInstance().setAutoInitEnabled(true);
+
 
 //                Log.v("token",FirebaseInstanceId.getInstance().getToken());
 
@@ -83,6 +86,8 @@ public class AuthActivity extends AppCompatActivity {
                                         "user(token)"+
                                         " VALUES('" + TOKEN + "');" +
                                         "");
+                                Intent intent = new Intent(AuthActivity.this, MainActivity.class);
+                                startActivity(intent);
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -93,11 +98,10 @@ public class AuthActivity extends AppCompatActivity {
                             Toast.makeText(AuthActivity.this,"아이디나 비밀번호가 일치하지 않습니다.",Toast.LENGTH_SHORT);
                         }
                         else if(response.body().getStatus() == 400){
-                            Toast.makeText(AuthActivity.this,"해당 계정이 존재하지 않습니다.",Toast.LENGTH_SHORT);
+                            Toast.makeText(AuthActivity.this,"해당 계정이 존재하지 않거나 토큰이 올바르지 않습니다.",Toast.LENGTH_SHORT);
                         }
 
-                        Intent intent = new Intent(AuthActivity.this, MainActivity.class);
-                        startActivity(intent);
+
                     }
 
                     @Override

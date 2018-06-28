@@ -1,31 +1,31 @@
 {
   "project_info": {
-    "project_number": "804639440099",
-    "firebase_url": "https://flow-27cdd.firebaseio.com",
-    "project_id": "flow-27cdd",
-    "storage_bucket": "flow-27cdd.appspot.com"
+    "project_number": "532271277454",
+    "firebase_url": "https://flow-56cc8.firebaseio.com",
+    "project_id": "flow-56cc8",
+    "storage_bucket": "flow-56cc8.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:804639440099:android:7877bbff2b5e3525",
+        "mobilesdk_app_id": "1:532271277454:android:e8d5546b50a76dd4",
         "android_client_info": {
           "package_name": "kr.hs.dgsw.flow"
         }
       },
       "oauth_client": [
         {
-          "client_id": "804639440099-e0mf5f0nlb1t605krug3vs0evm0r16hb.apps.googleusercontent.com",
+          "client_id": "532271277454-84jevj12tih5vnj6lnq1ukh8i3h6ajgn.apps.googleusercontent.com",
           "client_type": 3
         },
         {
-          "client_id": "804639440099-e0mf5f0nlb1t605krug3vs0evm0r16hb.apps.googleusercontent.com",
+          "client_id": "532271277454-84jevj12tih5vnj6lnq1ukh8i3h6ajgn.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBOJIAd3B20Kw0QPQWjQdi6FUbYzUT4Bts"
+          "current_key": "AIzaSyCl3MbiY4W-I8CQ5M_UAKVaYREf0xKYgT0"
         }
       ],
       "services": {

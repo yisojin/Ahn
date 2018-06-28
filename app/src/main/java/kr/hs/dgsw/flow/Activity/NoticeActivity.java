@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -30,8 +31,7 @@ import retrofit.Retrofit;
 
 public class NoticeActivity extends AppCompatActivity {
 
-    ArrayList<String> list = new ArrayList<>();
-    ArrayAdapter<String> adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,31 +39,32 @@ public class NoticeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notice);
         getSupportActionBar().hide();
 
-        ListView listView = (ListView) findViewById(R.id.lvNotice);
-        final List<JSONObject> Jlist = new ArrayList<JSONObject>();
+
 
         final DBManagerAuth auth = new DBManagerAuth(getApplicationContext());
 
         final Network network = Network.retrofit.create(Network.class);
-        Log.e("token", ">> " + auth.getLast());
+//        Log.e("token", ">> " + auth.getLast());
         Call<ResponseFormatNotice> call = network.list(auth.getLast());
         call.enqueue(new Callback<ResponseFormatNotice>() {
+
+            ListView listView = (ListView) findViewById(R.id.lvNotice);
             @Override
             public void onResponse(Response<ResponseFormatNotice> response, Retrofit retrofit) {
                 Log.e("list", response.message());
+                ArrayList<String> list = new ArrayList<String>();
+                ArrayAdapter<String> adapter;
 
+                List<Notice> lst = new ArrayList<Notice>();
+                for(Notice n : response.body().getData().getList()){
+                    lst.add(n);
+                    list.add(n.getContent());
+                    Log.e("data",n.getContent().toString());
+                }
 
-//                List<Notice> lst = new ArrayList<Notice>();
-//                for(Notice n : response.body().getData().getList()){
-//                    lst.add(n);
-//
-//                    Log.e("data",n.toString());
-//                }
+                adapter = new ArrayAdapter<String>(getApplicationContext(),R.layout.list_item,R.id.text1,list);
 
-//                Log.e("data",);
-
-
-//                list.add(response.body().getData().toString());
+                listView.setAdapter(adapter);
 
             }
 
@@ -74,8 +75,6 @@ public class NoticeActivity extends AppCompatActivity {
         });
 
 
-        adapter = new ArrayAdapter<String>(this,R.layout.list_item,R.id.text1,list);
 
-        listView.setAdapter(adapter);
     }
 }
