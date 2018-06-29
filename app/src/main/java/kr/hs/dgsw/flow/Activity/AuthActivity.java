@@ -33,7 +33,7 @@ import retrofit.Retrofit;
 public class AuthActivity extends AppCompatActivity {
 
     MyFirebaseInstanceIDService firebaseInstanceIDService;
-    public String TOKEN="";
+    public String TOKEN = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,9 +72,9 @@ public class AuthActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Response<ResponseFormat> response, Retrofit retrofit) {
                         Log.e("response", response.body().toString());
-                        Log.e("status",Integer.toString(response.body().getStatus()));
+                        Log.e("status", Integer.toString(response.body().getStatus()));
 
-                        if(response.body().getStatus() == 200){
+                        if (response.body().getStatus() == 200) {
                             try {
 
                                 JSONObject obj = new JSONObject(response.body().getData().toString());
@@ -83,7 +83,7 @@ public class AuthActivity extends AppCompatActivity {
 
                                 //database
                                 dbManagerAuth.insert("INSERT INTO " +
-                                        "user(token)"+
+                                        "user(token)" +
                                         " VALUES('" + TOKEN + "');" +
                                         "");
                                 Intent intent = new Intent(AuthActivity.this, MainActivity.class);
@@ -94,11 +94,10 @@ public class AuthActivity extends AppCompatActivity {
                             }
                         }
 
-                        if(response.body().getStatus() == 401){
-                            Toast.makeText(AuthActivity.this,"아이디나 비밀번호가 일치하지 않습니다.",Toast.LENGTH_SHORT);
-                        }
-                        else if(response.body().getStatus() == 400){
-                            Toast.makeText(AuthActivity.this,"해당 계정이 존재하지 않거나 토큰이 올바르지 않습니다.",Toast.LENGTH_SHORT);
+                        if (response.body().getStatus() == 401) {
+                            Toast.makeText(AuthActivity.this, "아이디나 비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT);
+                        } else if (response.body().getStatus() == 400) {
+                            Toast.makeText(AuthActivity.this, "해당 계정이 존재하지 않거나 토큰이 올바르지 않습니다.", Toast.LENGTH_SHORT);
                         }
 
 

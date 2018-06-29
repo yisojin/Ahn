@@ -32,14 +32,11 @@ import retrofit.Retrofit;
 public class NoticeActivity extends AppCompatActivity {
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice);
         getSupportActionBar().hide();
-
-
 
         final DBManagerAuth auth = new DBManagerAuth(getApplicationContext());
 
@@ -48,7 +45,8 @@ public class NoticeActivity extends AppCompatActivity {
         Call<ResponseFormatNotice> call = network.list(auth.getLast());
         call.enqueue(new Callback<ResponseFormatNotice>() {
 
-            ListView listView = (ListView) findViewById(R.id.lvNotice);
+            ListView listView =(ListView)findViewById(R.id.lvNotice);
+
             @Override
             public void onResponse(Response<ResponseFormatNotice> response, Retrofit retrofit) {
                 Log.e("list", response.message());
@@ -56,13 +54,13 @@ public class NoticeActivity extends AppCompatActivity {
                 ArrayAdapter<String> adapter;
 
                 List<Notice> lst = new ArrayList<Notice>();
-                for(Notice n : response.body().getData().getList()){
+                for (Notice n : response.body().getData().getList()) {
                     lst.add(n);
                     list.add(n.getContent());
-                    Log.e("data",n.getContent().toString());
+                    Log.e("data", n.getContent().toString());
                 }
 
-                adapter = new ArrayAdapter<String>(getApplicationContext(),R.layout.list_item,R.id.text1,list);
+                adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.list_item, R.id.text1, list);
 
                 listView.setAdapter(adapter);
 
@@ -73,7 +71,6 @@ public class NoticeActivity extends AppCompatActivity {
                 Log.e("error", t.getMessage());
             }
         });
-
 
 
     }

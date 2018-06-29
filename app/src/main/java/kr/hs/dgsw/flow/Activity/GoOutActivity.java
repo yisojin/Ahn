@@ -94,19 +94,19 @@ public class GoOutActivity extends AppCompatActivity {
                             public void onResponse(Response<ResponseFormat> response, Retrofit retrofit) {
                                 Log.e("response", response.body().toString());
 
-                                if(response.body().getStatus() == 200){
+                                if (response.body().getStatus() == 200) {
                                     //success
-                                    application.insert("INSERT INTO application(kind,start_time,end_time,reason) VALUES(\'외출\',\'"+SDATETIME+"\',\'"+EDATETIME+"\',\'"+reason+"\');");
+                                    application.insert("INSERT INTO application(kind,start_time,end_time,reason) VALUES(\'외출\',\'" + SDATETIME + "\',\'" + EDATETIME + "\',\'" + reason + "\');");
                                     Intent intent = new Intent(GoOutActivity.this, TestGoOutActivity.class);
                                     startActivity(intent);
                                 }
-                                if(response.body().getStatus() == 409){
+                                if (response.body().getStatus() == 409) {
                                     Toast.makeText(GoOutActivity.this, "이미 신청 하셨습니다.", Toast.LENGTH_SHORT).show();
                                 }
-                                if(response.body().getStatus() == 412){
-                                    Toast.makeText(GoOutActivity.this,"신청 날짜가 유효하지 않습니다",Toast.LENGTH_SHORT).show();
+                                if (response.body().getStatus() == 412) {
+                                    Toast.makeText(GoOutActivity.this, "신청 날짜가 유효하지 않습니다", Toast.LENGTH_SHORT).show();
                                 }
-                                if(response.body().getStatus() == 400){
+                                if (response.body().getStatus() == 400) {
                                     Toast.makeText(GoOutActivity.this, "입력양식을 맞춰주세요.", Toast.LENGTH_SHORT).show();
                                 }
                             }
@@ -124,19 +124,19 @@ public class GoOutActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(Response<ResponseFormat> response, Retrofit retrofit) {
                                 Log.e("response", response.body().toString());
-                                if(response.body().getStatus() == 200){
+                                if (response.body().getStatus() == 200) {
                                     //success
-                                    application.insert("INSERT INTO application(kind,start_time,end_time,reason) VALUES(\'외박\',\'"+SDATETIME+"\',\'"+EDATETIME+"\',\'"+reason+"\');");
+                                    application.insert("INSERT INTO application(kind,start_time,end_time,reason) VALUES(\'외박\',\'" + SDATETIME + "\',\'" + EDATETIME + "\',\'" + reason + "\');");
                                     Intent intent = new Intent(GoOutActivity.this, TestGoOutActivity.class);
                                     startActivity(intent);
                                 }
-                                if(response.body().getStatus() == 409){
+                                if (response.body().getStatus() == 409) {
                                     Toast.makeText(GoOutActivity.this, "이미 신청 하셨습니다.", Toast.LENGTH_SHORT).show();
                                 }
-                                if(response.body().getStatus() == 412){
-                                    Toast.makeText(GoOutActivity.this,"신청 날짜가 유효하지 않습니다",Toast.LENGTH_SHORT).show();
+                                if (response.body().getStatus() == 412) {
+                                    Toast.makeText(GoOutActivity.this, "신청 날짜가 유효하지 않습니다", Toast.LENGTH_SHORT).show();
                                 }
-                                if(response.body().getStatus() == 400){
+                                if (response.body().getStatus() == 400) {
                                     Toast.makeText(GoOutActivity.this, "입력양식을 맞춰주세요.", Toast.LENGTH_SHORT).show();
                                 }
                             }
@@ -207,15 +207,15 @@ public class GoOutActivity extends AppCompatActivity {
             month += 1;
             String mmmm = "";
             String dddd = "";
-            if(month<10){
-                mmmm = "0"+month;
-            }else{
-                mmmm = month+"";
+            if (month < 10) {
+                mmmm = "0" + month;
+            } else {
+                mmmm = month + "";
             }
-            if(dayOfMonth<10){
-                dddd = "0"+dayOfMonth;
-            }else{
-                dddd = dayOfMonth+"";
+            if (dayOfMonth < 10) {
+                dddd = "0" + dayOfMonth;
+            } else {
+                dddd = dayOfMonth + "";
             }
             SDATE = year + "-" + mmmm + "-" + dddd;
         }
@@ -225,17 +225,17 @@ public class GoOutActivity extends AppCompatActivity {
     private TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            String hhhh="";
-            String mmmm  ="";
-            if(hourOfDay<10){
-                hhhh = "0"+hourOfDay;
-            }else{
-                hhhh=hourOfDay+"";
+            String hhhh = "";
+            String mmmm = "";
+            if (hourOfDay < 10) {
+                hhhh = "0" + hourOfDay;
+            } else {
+                hhhh = hourOfDay + "";
             }
             if (minute < 10) {
-                mmmm = "0"+minute;
-            }else{
-                mmmm = minute+"";
+                mmmm = "0" + minute;
+            } else {
+                mmmm = minute + "";
             }
             STIME = hourOfDay + ":" + minute;
         }
@@ -248,15 +248,15 @@ public class GoOutActivity extends AppCompatActivity {
             month += 1;
             String mmmm = "";
             String dddd = "";
-            if(month<10){
-                mmmm = "0"+month;
-            }else{
-                mmmm = month+"";
+            if (month < 10) {
+                mmmm = "0" + month;
+            } else {
+                mmmm = month + "";
             }
-            if(dayOfMonth<10){
-                dddd = "0"+dayOfMonth;
-            }else{
-                dddd = dayOfMonth+"";
+            if (dayOfMonth < 10) {
+                dddd = "0" + dayOfMonth;
+            } else {
+                dddd = dayOfMonth + "";
             }
             EDATE = year + "-" + mmmm + "-" + dddd;
         }
@@ -266,17 +266,17 @@ public class GoOutActivity extends AppCompatActivity {
     private TimePickerDialog.OnTimeSetListener EtimeSetListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            String hhhh="";
-            String mmmm  ="";
-            if(hourOfDay<10){
-                hhhh = "0"+hourOfDay;
-            }else{
-                hhhh = hourOfDay+"";
+            String hhhh = "";
+            String mmmm = "";
+            if (hourOfDay < 10) {
+                hhhh = "0" + hourOfDay;
+            } else {
+                hhhh = hourOfDay + "";
             }
             if (minute < 10) {
-                mmmm = "0"+minute;
-            }else{
-                mmmm = minute+"";
+                mmmm = "0" + minute;
+            } else {
+                mmmm = minute + "";
             }
             ETIME = hourOfDay + ":" + minute;
         }

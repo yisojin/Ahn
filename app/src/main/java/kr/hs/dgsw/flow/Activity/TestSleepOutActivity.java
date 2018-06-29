@@ -24,11 +24,11 @@ public class TestSleepOutActivity extends AppCompatActivity {
 
         ListView listView = (ListView) findViewById(R.id.listSleepOut);
 
-        for(String item: dbManagerApplication.PrintData()){
+        for (String item : dbManagerApplication.PrintData()) {
             list.add(item);
         }
 
-        adapter = new ArrayAdapter<String>(this,R.layout.list_item,R.id.text1,list);
+        adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.text1, list);
 
         listView.setAdapter(adapter);
 

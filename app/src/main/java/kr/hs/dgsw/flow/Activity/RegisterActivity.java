@@ -92,8 +92,6 @@ public class RegisterActivity extends AppCompatActivity {
                     });
 
 
-
-
                 } else if (!email.matches(emailPattern) && firPassword.equals(re_password)) {
 
                     //이메일 형식이 아니고
@@ -115,7 +113,6 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, "회원가입에 실패했습니다.", Toast.LENGTH_SHORT).show();
 
                 }
-
 
 
             }

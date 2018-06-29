@@ -51,7 +51,7 @@ public class MealActivity extends AppCompatActivity {
 
             List<Integer> date = new ArrayList<Integer>();
             date.add(year);
-            date.add(month+1);
+            date.add(month + 1);
             date.add(dayOfMonth);
 
             new RunTask2(findViewById(android.R.id.content), date).execute();
